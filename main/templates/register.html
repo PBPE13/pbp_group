@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<nav class="navbar bg-dark border-bottom border-body navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">Literatour</a>
+    </div>
+</nav>
+
+<div class="register-title">
+    <div class="card" style="width: 15rem;">
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">Registration</li>
+        </ul>
+    </div>
+</div>
+
+<div class = "register">
+
+    <br />
+
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                {{ form.as_table }}  
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="{% url 'main:login' %}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" name="submit" class="btn btn-primary">Daftar</button>
+                    </td>
+                </tr>
+            </table>  
+        </form>
+
+        <br />
+    
+
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
+
+</div>  
+
+{% endblock content %}

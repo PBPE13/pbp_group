@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+<nav class="navbar bg-dark border-bottom border-body navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">Literatour</a>
+    </div>
+</nav>
+
+<br />
+
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">User Login</li>
+    </ul>
+</div>
+
+<div class = "login">
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table class="logintable">
+            <tr>
+                <td>Username : </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password : </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+        </table>
+        
+        <br />
+
+        <div class="login_button">
+            <input class="btn btn-primary" type="submit" value="Login">
+        </div>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+
+    <br />
+        
+    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+
+</div>
+
+{% endblock content %}
