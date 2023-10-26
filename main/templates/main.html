@@ -48,6 +48,37 @@
     <p>Sesi terakhir login: {{ last_login }}</p>
 </div>
 
+<div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 row-cols-xs-1 g-4">
+</div>
+
 <script>
+    async function getBooks() {
+            return fetch("{% url 'book:get_books' %}").then((res) => res.json())
+        }
+        async function refreshBooks() {
+            document.querySelector(".row").innerHTML = "";
+            const books = await getBooks();
+            
+            books.forEach((item, index) => {
+                const bookCard = `
+                    <div class="col">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title">${item.fields.title}</h5>
+                                <p class="card-text">${item.fields.authors}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Rating: ${item.fields.average_rating}</li>
+                             </ul>
+                        </div>
+                    </div>`;
+                
+                const row = document.querySelector(".row");
+                row.innerHTML += bookCard;
+
+            });
+        }
+
+        refreshBooks();
 </script>
 {% endblock content %}
