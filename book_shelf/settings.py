@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     "book",
     'diary',
+    "forum",
 ]
 
 MIDDLEWARE = [

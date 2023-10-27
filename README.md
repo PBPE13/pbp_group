@@ -11,7 +11,7 @@
 
     LITERATOUR memungkinkan pengguna untuk mengeksplorasi dan menikmati dunia buku dalam lingkungan daring ini.
 ## Modul
-   1. Register dan Login Page
+   1. Register dan Loguin Page
       * Buat account
       * Login user
       * Login as guest
