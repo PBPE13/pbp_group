@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<nav class="navbar navbar-dark bg-primary border-bottom border-body navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar bg-primary border-bottom border-body navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand">Literatour</a>
         <form class="d-flex">
@@ -33,8 +33,6 @@
         </button>
     </div>
 </nav>
-
-
 
 <br />
 
@@ -67,13 +65,15 @@
                 const bookCard = `
                     <div class="col">
                         <div class="card mb-4">
+                            <img src="https://images.saymedia-content.com/.image/t_share/MTc0MjYyNTc5Mjg2MjU1MTAw/10-books-over-1000-pages-to-read.jpg" class="card-img-top" alt="${item.fields.title}">
                             <div class="card-body">
-                                <h3 class="card-title">${item.fields.title}</h3>
+                                <h4 class="card-title">${item.fields.title}</h3>
                                 <p class="card-text">${item.fields.authors}</p>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Rating: ${item.fields.average_rating}</li>
                              </ul>
+                             <button type="button" class="btn btn-sm btn-primary">Borrow</button>
                         </div>
                     </div>`;
                 
