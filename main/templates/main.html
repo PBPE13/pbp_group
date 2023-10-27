@@ -53,18 +53,20 @@
 
 <script>
     async function getBooks() {
-            return fetch("{% url 'book:get_books' %}").then((res) => res.json())
-        }
-        async function refreshBooks() {
-            document.querySelector(".row").innerHTML = "";
-            const books = await getBooks();
-            
-            books.forEach((item, index) => {
+        return fetch("{% url 'book:get_books' %}").then((res) => res.json())
+    }
+
+    async function refreshBooks(filter = "") {
+        document.querySelector(".row").innerHTML = "";
+        const books = await getBooks();
+        
+        books.forEach((item, index) => {
+            if (item.fields.title.toLowerCase().includes(filter.toLowerCase())) {
                 const bookCard = `
                     <div class="col">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h3 class="card-title">${item.fields.title}</h5>
+                                <h3 class="card-title">${item.fields.title}</h3>
                                 <p class="card-text">${item.fields.authors}</p>
                             </div>
                             <ul class="list-group list-group-flush">
@@ -75,10 +77,33 @@
                 
                 const row = document.querySelector(".row");
                 row.innerHTML += bookCard;
+            }
+        });
+    }
 
-            });
+    function handleSearch() {
+        const searchText = document.querySelector('.form-control').value;
+        refreshBooks(searchText);
+    }
+
+    document.querySelector('.d-flex').addEventListener('submit', (event) => {
+        event.preventDefault();
+        handleSearch();
+    });
+
+    document.querySelector('.form-control').addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            handleSearch();
         }
+    });
 
-        refreshBooks();
+    document.querySelector('.btn-outline-success').addEventListener('click', (event) => {
+        handleSearch();
+    });
+
+    refreshBooks();
 </script>
+
+
+
 {% endblock content %}
