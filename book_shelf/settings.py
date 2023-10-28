@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'diary',
     'book_review',
     'borrow_book',
+    'forum'
 ]
 
 MIDDLEWARE = [

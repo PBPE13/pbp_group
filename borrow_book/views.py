@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from borrow_book.models import Borrow
-from main.models import Book
+from book.models import Book
 import datetime
 
 # Create your views here.
