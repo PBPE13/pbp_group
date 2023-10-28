@@ -16,7 +16,6 @@
 
         <style type="text/css">
             .login {
-                color: whitesmoke;
                 margin-left: 35px;
                 margin-top: 30px;
             }
@@ -25,7 +24,6 @@
                 margin-left: 5px;
             }
             .register {
-                color: whitesmoke;
                 margin-left: 30px;
                 margin-top: 35px;
             }
@@ -40,13 +38,8 @@
             .row {
                 margin-right: 20px;
             }
-            .last_login {
-                text-align: center;
-                font-size: 15px;
-                color: whitesmoke;
-            }
             body {
-                background-color: rgb(84, 84, 89);
+                background-color: rgb(255, 255, 255);
             }
 
         </style>
@@ -95,10 +88,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
-        </nav>        
-        <div class="px-3 py-3">
+        </nav>
         {% block content %}
         {% endblock content %}
-        </div>
     </body>
 </html>
