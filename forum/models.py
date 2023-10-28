@@ -3,10 +3,13 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from book.models import Book
+
 # Create your models here.
 class ForumPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    topic = models.CharField(max_length=140)
+    title= models.TextField(null= True, blank= True) 
+    topic = models.CharField(max_length=140, default="none")
     description = models.TextField()
     date = models.DateTimeField(auto_now_add=True,null=True)
     def __str__(self):
@@ -17,6 +20,8 @@ class ForumPost(models.Model):
             return self.description
         else:
             return self.description[:1000] + "..."
+        
+    
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
