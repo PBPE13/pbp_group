@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{name}}'s Diary</h1>
+
+<center><p>Total entries in the diary: {{ booksInDiaryCount }} </p></center>
+<div class="diary">
+    <ul class="cards" id="diary_cards">
+    </ul>
+</div>
+
+<center><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Diary</button></center>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Diary</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="diaryForm">
+                    <div class="mb-3">
+                        <label for="book" class="form-label">Select a Book</label>
+                        <select class="form-select" id="title" name="title">
+                            <option value="" selected disabled>Select a Book</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="finishDate" class="form-label">Finish Date</label>
+                        <input type="date" class="form-control" id="finishDate" name="finishDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function getBook() {
+        return fetch("{% url 'book:get_books' %}").then((res) => res.json())
+    }
+
+    async function getDiary() {
+        return fetch("{% url 'diary:get_diary_json' %}").then((res) => res.json())
+    }
+
+    async function makeDropdown() {
+        const bookDropdown = document.getElementById("title");
+        bookDropdown.innerHTML = '<option value="" selected disabled>Select a Book</option>';
+
+        const books = await getBook();
+        console.log(books); 
+
+        books.forEach(book => {
+            const option = document.createElement("option");
+            option.value = book.fields.title;
+            option.textContent = book.fields.title;
+            bookDropdown.appendChild(option);
+        });
+    }
+
+    makeDropdown();
+
+    async function refreshDiary() {
+        document.getElementById("diary_cards").innerHTML = ""
+        const diaries = await getDiary();
+
+        let htmlString = '<div class="cards">';
+
+        diaries.forEach((diary) => {
+            htmlString += `<li>
+                <div class="card" style="background-color: #E3E9F3; margin-right: 10;">
+                    <div class="card_content">
+                        <h2 class="card_title">${diary.fields.title}</h2>
+                        <div class="card_text">
+                            <p><span class="note">Finish date: ${diary.fields.finishDate}</span></p>
+                            <p>${diary.fields.notes}</p>
+                        </div>
+                    </div>
+                </div>
+            </li>`;
+        document.getElementById("diary_cards").innerHTML = htmlString 
+        });
+    }
+
+    refreshDiary();
+
+    function addDiary() {
+
+        fetch("{% url 'diary:add_diary_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#diaryForm')),
+        })
+        .then(refreshDiary)
+            
+        document.getElementById("diaryForm").reset();
+        return false
+    }
+
+    document.getElementById("button_add").onclick = addDiary
+
+</script>
+
+{% endblock content %}
