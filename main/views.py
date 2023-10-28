@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 
-@login_required
+
 def show_main(request):
     return render(request, "main.html")
 
