@@ -7,9 +7,11 @@ from main.models import Profile
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Your username',
+        'class': 'w-full py-4 px-6 rounded-xl',
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Your password',
+        'class': 'w-full py-4 px-6 rounded-xl',
     }))
 
 class RegisterForm(UserCreationForm):
@@ -20,21 +22,27 @@ class RegisterForm(UserCreationForm):
     )
     name = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Your username',
+        'class': 'w-full py-4 px-6 rounded-xl',
     }))
     username = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Your username',
+        'class': 'w-full py-4 px-6 rounded-xl',
     }))
     preferred_genre = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'What are your favorite genres ?',
+        'placeholder': 'Action',
+        'class': 'w-full py-4 px-6 rounded-xl',
     }))
     bio_data = forms.CharField(widget=forms.Textarea(attrs={
         'placeholder': 'Tell us about yourself !',
+        'class': 'w-full py-4 px-6 rounded-xl',
     }))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Your password',
+        'class': 'w-full py-4 px-6 rounded-xl',
     }))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Repeat password',
+        'class': 'w-full py-4 px-6 rounded-xl',
     }))
     class Meta:
         model = User

@@ -16,19 +16,60 @@
 
     <br />
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>
-                    <td></td>
-                    <td>
-                        <a href="{% url 'main:login' %}" class="btn btn-secondary">Cancel</a>
-                        <button type="submit" name="submit" class="btn btn-primary">Daftar</button>
-                    </td>
-                </tr>
-            </table>  
-        </form>
+    <form method="POST" action=".">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Role:</label><br>
+            {{ form.role }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Full Name</label><br>
+            {{ form.name }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Username</label><br>
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Preferred Genre</label><br>
+            {{ form.preferred_genre }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Short Description</label><br>
+            {{ form.bio_data }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Password</label><br>
+            {{ form.password1 }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Repeat password</label><br>
+            {{ form.password2 }}
+        </div>
+
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <a class="text-lg">Already have an account?</a>
+        <a class="underline text-lg text-blue-700" href="{% url 'main:login' %}">Log in</a>
+        <br>
+
+        <button class="my-2 py-2 px-7 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Submit</button>
+    </form>
 
         <br />
     

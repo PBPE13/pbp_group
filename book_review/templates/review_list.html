@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Reviews</title>
+    <link rel="stylesheet" href="<!-- your stylesheet link here -->">
+    <!-- Add any other head elements here -->
+</head>
+<body>
+    <div class="container">
+        <h1>Book Reviews</h1>
+
+        {% for review in reviews %}
+            <div class="review">
+                <h2>{{ review.title }}</h2>
+                <p><strong>Reviewed by:</strong> {{ review.user.username }}</p>
+                <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+                <p><strong>Date:</strong> {{ review.review_date|date:"d M Y" }}</p>
+                <p>{{ review.content }}</p>
+
+                {% if user.is_authenticated and user == review.user %}
+                    <a href="{% url 'edit_review_url' review.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_review_url' review.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No reviews available.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -13,25 +13,42 @@
 
 <div class = "login">
 
-    <form method="POST" action="">
+    <form method="POST" action=".">
         {% csrf_token %}
-        <table class="logintable">
-            <tr>
-                <td>Username : </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password : </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-        </table>
-        
-        <br />
-
-        <div class="login_button">
-            <input class="btn btn-primary" type="submit" value="Login">
+        <div class="mb-3">
+            <label class="inline-block mb-2">Username</label><br>
+            {{ form.username }}
         </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Password</label><br>
+            {{ form.password }}
+        </div>
+
+        {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                        <li class="text-lg text-red-500">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <a class="text-lg">Don't have an account yet?</a>
+        <a class="underline text-lg text-blue-700" href="{% url 'main:register' %}">Sign up</a>
+        <br>
+
+        <button class="my-2 py-2 px-7 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Submit</button>
     </form>
 
     {% if messages %}
