@@ -2,4 +2,65 @@
 
 {% block content %}
 
+<br />
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+</div>
+
+<script>
+    async function getBooks() {
+        return fetch("{% url 'book:get_books' %}").then((res) => res.json())
+    }
+
+    async function refreshBooks(filter = "") {
+        document.querySelector(".grid").innerHTML = "";
+        const books = await getBooks();
+        
+        books.forEach((item, index) => {
+            if (item.fields.title.toLowerCase().includes(filter.toLowerCase())) {
+                const bookCard = `
+                    <div class="col">
+                        <div class="max-w-sm rounded overflow-hidden shadow-lg mb-4">
+                            <img src="https://images.saymedia-content.com/.image/t_share/MTc0MjYyNTc5Mjg2MjU1MTAw/10-books-over-1000-pages-to-read.jpg" class="w-full" alt="${item.fields.title}">
+                            <div class="px-6 py-4">
+                                <h4 class="font-bold text-xl mb-2">${item.fields.title}</h4>
+                                <p class="text-gray-700 text-base">${item.fields.authors}</p>
+                            </div>
+                            <ul class="list-none bg-white rounded-b-lg">
+                                <li class="text-gray-700 text-base px-6 py-4">Rating: ${item.fields.average_rating}</li>
+                            </ul>
+                            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Borrow</button>
+                        </div>
+                    </div>`;
+                
+                const row = document.querySelector(".grid");
+                row.innerHTML += bookCard;
+            }
+        });
+    }
+
+    function handleSearch() {
+        const searchText = document.querySelector('.form-control').value;
+        refreshBooks(searchText);
+    }
+
+    document.querySelector('.d-flex').addEventListener('submit', (event) => {
+        event.preventDefault();
+        handleSearch();
+    });
+
+    document.querySelector('.form-control').addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    });
+
+    document.querySelector('.btn-outline-success').addEventListener('click', (event) => {
+        handleSearch();
+    });
+
+    refreshBooks();
+</script>
+
+
 {% endblock content %}

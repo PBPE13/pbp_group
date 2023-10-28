@@ -81,9 +81,8 @@
         
         const card = (data) =>
             `<div id="comment-${data.pk}">
-                <div class="card border-1 bg-light" style="margin:10px 50px 10px 50px">
+                <div class="card border-1 bg-light" style="margin:10px 50px 10px 50px;">
                     <div class="card-body p-25 style="margin:20px 20px">
-        
                     </div>
                     <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                         <div class="d-flex align-items-end justify-content-between">
@@ -106,19 +105,20 @@
 
             const cardUser = (data) =>
             `<div id="comment-${data.pk}">
-                <div class="card border-1 bg-light" style="margin:10px 50px 10px 50px">
+                <div class="card border-1 bg-light" style="margin:10px 50px 10px 50px;">
                     <div class="card-body p-25 style="margin:20px 20px">
                     </div>
                     <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                         <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center" style="display:inline-block">
+                            <div class="d-flex align-items-center">
                                 <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." style="width:60px; height:60px">
                                 <div class="small">
-                                    <div style="float: left;">
+                                    <div style="float: left">
                                         <div class="fw-bold">${data.user} </div>
                                         <div class="text-muted">${data.date}</div>
                                     </div>
 
+                                
                                 </div>
                             </div>
                             <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:black"></i></button>
@@ -171,7 +171,7 @@
                             <article>
                                 <!-- Post header-->
                                 <div class="card border-1 bg-light" style="margin: 10px 35px 10px 35px">
-                                    <header class="p-5" style="padding-top: 1.5rem !important; padding-bottom: 0rem !important;">
+                                    <header class="p-5" style="padding-top: 1.5rem !important; padding-bottom: rem !important;">
                                         <h1 class="fw-bolder mb-1">{{forumPost.topic}}</h1>
                                         <div><h1 class="mb-0" style="margin-top: 5px;">{{forumPost.title}}</h1></div>
                                         <div class="text-muted fst-italic mb-2">{{forumPost.date}}</div>
@@ -203,7 +203,7 @@
                                             </div>
                                             
                                         </form>
-                                        <button  class="btn btn-primary" id="add-comment" style="margin:10px 40px;">Add</button>
+                                        <button id="add-comment" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl" style="margin-left: 3rem;margin-bottom: 1.5rem;">Add</button>
                                     {% else %}
                                         <div class="d-flex mb-4">
                                             <!-- Parent comment-->
@@ -218,7 +218,7 @@
                     </div>
                 
                 </div>
-                <div class="grid gap-4 grid-cols-1 sm:grid-flow-cols-1 md:grid-cols-3 lg:grid-cols-4 m-4" id="todo" style="justify-content: center; align-items: center; padding:0px 40px">
+                <div class="grid gap-4 sm:grid-flow-cols-1 " id="todo" style="justify-content: center; align-items: center; padding:0px 40px; margin: 10px 35px 10px 35px">
                 </div>
             </section>
         </main>

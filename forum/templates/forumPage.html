@@ -24,12 +24,14 @@
         <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
         <style>
             h1, h2 {
-                font-family: "Mulish"; 
+                font-family: "Mulish";
+                color: black;
+                font-size: 2rem !important;
+                
             }
-            h1, h2  :not(footer){
-                color:black
+            p {
+                font-family: "Manrope"
             }
-            
 
             </style>
         <script>
@@ -75,14 +77,14 @@
         const cardUser = (data) =>
         `<div id="forum-${data.pk}">
                 <div class="card border-1 bg-light" style="margin:10px 15px 10px 15px">
-                    <div class="card-body p-25 style="margin:10px 20px">
+                    <div class="card-body p-25" style="margin:18px 18px">
                     <div class="h5 card-title mb-3" style="display:inline-block; font-weight:bold"> ${data.topic} </div>
-                    <br>
                     <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:black"></i></button>
+                    <br>
                     <div class="h5 card-title mb-3" style="display:inline-block";> ${data.title} </div>
                     <p class="card-text mb-0">${data.description}</p>
                     </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0"style="margin:0px 18px 0px 18px">
                         <div class="d-flex align-items-end justify-content-between">
                             <div class="d-flex align-items-center">
                                 <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="...">
@@ -98,15 +100,15 @@
             </div>`
             
         const card = (data) =>
-            `<div id="forum-${data.pk}">
+        `<div id="forum-${data.pk}">
                 <div class="card border-1 bg-light" style="margin:10px 15px 10px 15px">
-                    <div class="card-body p-25 style="margin:10px 20px">
+                    <div class="card-body p-25" style="margin:18px 18px">
                     <div class="h5 card-title mb-3" style="display:inline-block; font-weight:bold"> ${data.topic} </div>
                     <br>
                     <div class="h5 card-title mb-3" style="display:inline-block";> ${data.title} </div>
                     <p class="card-text mb-0">${data.description}</p>
                     </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0"style="margin:0px 18px 0px 18px">
                         <div class="d-flex align-items-end justify-content-between">
                             <div class="d-flex align-items-center">
                                 <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="...">
@@ -141,14 +143,14 @@
     </head>
       
     <body style= "background-color: white;" >
-        <div class="container px-3 py-3">
+        <div class="container px-4 py-4">
             <div class="row gx-5">
-                    <div class="card border-0 h-50 bg-light">
+                    <div class="card border-0 h-50 bg-light ml-3" >
                         <div class="card-body p-25">
                             <div class="h-100 align-items-center justify-content-center">
                                 <div class="text-center">
-                                    <a class="text-decoration-none" href=".">
-                                        <h2 class="fw-bolder fs-25 mb-25 mt-5" style="color:black">Literatour Forum</h2>
+                                    <a class="text-decoration-none" href="/forum/">
+                                        <h2 class="fw-bolder fs-25 mb-25" style="font-family: 'Manrope'; color: black">Literatour Forum</h2>
                                     </a>
                                     <body class="d-flex flex-column" style="height:40px">
                                         <section class="py-5">
@@ -174,7 +176,7 @@
                                                                 <!-- Submit Button-->
                                                                 <!-- Example single danger button -->
                                                                 <!-- Example single danger button -->
-                                                                <p style="float: left"> Book Title: </p>
+                                                                <p style="float: left; margin-bottom: 0.5rem; font-weight: bold;"> Book Title: </p>
                                                                 <!-- Example single danger button -->
                                                                 <select id = "title" name="title"  class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                                     {% for book in books %}
@@ -182,7 +184,7 @@
                                                                     {% endfor %}
                                                                 </select>
                                                             </form>
-                                                            <button type="button" class="btn btn-primary" id="add-post" style="margin:20px 20px;">Add</button>
+                                                            <button id="add-comment" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl" style="margin-top: 1.5rem; width: 60px;">Add</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -193,7 +195,7 @@
                         </div>
                     </div>
                 <h2 style="margin:50px 0px 0px 40px; float: left" >Posts</h2>
-                <div class="grid gap-4 grid-cols-1 sm:grid-flow-cols-1 md:grid-cols-3 lg:grid-cols-4 m-4" id="todo" style="justify-content: center; align-items: center">
+                <div class="grid gap-4 sm:grid-flow-cols-1 " id="todo" style="justify-content: center; align-items: center;margin:0px 40px 0px 40px;">
                 </div>     
             </div>
         </div>
