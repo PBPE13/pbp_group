@@ -2,60 +2,55 @@
 
 {% block title %}Register{% endblock %}
 
-{% block content %}  
+{% block content %}
+{% load widget_tweaks %}
 
 <div class="register-title">
-    <div class="card" style="width: 15rem;">
-        <ul class="list-group list-group-flush">
-        <li class="list-group-item">Registration</li>
-        </ul>
-    </div>
+    <h1 class="text-3xl font-bold">Register</h1>
 </div>
 
-<div class = "register">
-
-    <br />
+<div class="register bg-gray-100 p-6 rounded-lg">
 
     <form method="POST" action=".">
         {% csrf_token %}
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Role:</label><br>
-            {{ form.role }}
+        <div class="mb-6">
+            <label class="inline-block mb-2 text-2xl font-bold">Role:</label><br>
+            {{ form.role|add_class:"w-full max-w-xs bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" }}
         </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Full Name</label><br>
-            {{ form.name }}
+        <div class="mb-6">
+            <label class="inline-block mb-2 text-2xl font-bold">Full Name</label><br>
+            {{ form.name|add_class:"w-full max-w-xs bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" }}
         </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Username</label><br>
-            {{ form.username }}
+        <div class="mb-6">
+            <label class="inline-block mb-2 text-2xl font-bold">Username</label><br>
+            {{ form.username|add_class:"w-full max-w-xs bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" }}
         </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Preferred Genre</label><br>
-            {{ form.preferred_genre }}
+        <div class="mb-6">
+            <label class="inline-block mb-2 text-2xl font-bold">Preferred Genre</label><br>
+            {{ form.preferred_genre|add_class:"w-full max-w-xs bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" }}
         </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Short Description</label><br>
-            {{ form.bio_data }}
+        <div class="mb-6">
+            <label class="inline-block mb-2 text-2xl font-bold">Short Description</label><br>
+            {{ form.bio_data|add_class:"w-full max-w-xs bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" }}
         </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Password</label><br>
-            {{ form.password1 }}
+        <div class="mb-6">
+            <label class="inline-block mb-2 text-2xl font-bold">Password</label><br>
+            {{ form.password1|add_class:"w-full max-w-xs bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" }}
         </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Repeat password</label><br>
-            {{ form.password2 }}
+        <div class="mb-6">
+            <label class="inline-block mb-2 text-2xl font-bold">Repeat Password</label><br>
+            {{ form.password2|add_class:"w-full max-w-xs bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" }}
         </div>
 
         {% if form.errors or form.non_field_errors %}
-            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+            <div class="mb-6 w-full max-w-xs p-6 bg-red-100 rounded-xl">
                 {% for field in form %}
                     {{ field.errors }}
                 {% endfor %}
@@ -71,17 +66,17 @@
         <button class="my-2 py-2 px-7 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Submit</button>
     </form>
 
-        <br />
-    
-
     {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
+        <div class="w-full max-w-xs">
+            <ul>   
+                {% for message in messages %}  
+                    <li class="text-lg text-red-500">{{ message }}</li>  
                 {% endfor %}  
-        </ul>   
+            </ul> 
+        </div>  
     {% endif %}
 
-</div>  
+</div>
+  
 
 {% endblock content %}
