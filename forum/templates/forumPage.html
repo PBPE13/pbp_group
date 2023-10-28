@@ -14,6 +14,7 @@
         <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
+        <title>Literatour | Forum</title>
         <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
         <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
         <meta name="generator" content="Nicepage 4.20.1, nicepage.com">
@@ -72,14 +73,14 @@
         
         
         const cardUser = (data) =>
-            `<div id="forum-${data.pk}">
+        `<div id="forum-${data.pk}">
                 <div class="card border-1 bg-light" style="margin:10px 15px 10px 15px">
-                    <div class="card-body p-4">
-                        <div class="h5 card-title mb-3" style="display:inline-block; font-weight:bold"> ${data.topic} </div>
-                        <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:black"></i></button>
-                        <br>
-                        <h6 class="card-subtitle mb-2 text-muted"> ${data.title} </h6>
-                        <p class="card-text mb-3" style="font-style:normal">${data.description}</p>
+                    <div class="card-body p-25 style="margin:10px 20px">
+                    <div class="h5 card-title mb-3" style="display:inline-block; font-weight:bold"> ${data.topic} </div>
+                    <br>
+                    <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:black"></i></button>
+                    <div class="h5 card-title mb-3" style="display:inline-block";> ${data.title} </div>
+                    <p class="card-text mb-0">${data.description}</p>
                     </div>
                     <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                         <div class="d-flex align-items-end justify-content-between">
@@ -92,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/forum/detail/${data.pk}"class="card-link" style="padding:0px 40px 20px 20px; text-align:right ;color: #757575 ;text-decoration: none;">See Comments</a>
+                    <a href="/forum/detail/${data.pk}" class="card-link" style="padding:0px 40px 20px 20px; text-align:right; color:#2F6D80; text-decoration: none; color: #757575 ;">View All Comments</a>
                 </div>
             </div>`
             
@@ -101,7 +102,6 @@
                 <div class="card border-1 bg-light" style="margin:10px 15px 10px 15px">
                     <div class="card-body p-25 style="margin:10px 20px">
                     <div class="h5 card-title mb-3" style="display:inline-block; font-weight:bold"> ${data.topic} </div>
-                    <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 20px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:#2F6D80"></i></button>
                     <br>
                     <div class="h5 card-title mb-3" style="display:inline-block";> ${data.title} </div>
                     <p class="card-text mb-0">${data.description}</p>
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/forum/detail/${data.pk}" class="card-link" style="padding:0px 40px 20px 20px; text-align:right; color:#2F6D80; text-decoration: none; color: #757575 ;">See Comments</a>
+                    <a href="/forum/detail/${data.pk}" class="card-link" style="padding:0px 40px 20px 20px; text-align:right; color:#2F6D80; text-decoration: none; color: #757575 ;">View All Comments</a>
                 </div>
             </div>`
             
@@ -141,37 +141,6 @@
     </head>
       
     <body style= "background-color: white;" >
-        <nav class="navbar bg-primary border-bottom border-body navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand">Literatour</a>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Pinjam Buku</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Reading List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/forum/">Forum</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'main:logout' %}">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
         <div class="container px-3 py-3">
             <div class="row gx-5">
                     <div class="card border-0 h-50 bg-light">

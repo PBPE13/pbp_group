@@ -6,5 +6,5 @@ class BookForm(forms.Form):
         model = Book
     title= forms.CharField(label='Judul', max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'name':'title'})) 
     authors= forms.CharField(label='Penulis', max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'name':'authors'})) 
-    num_pages = forms.IntegerField(label='Jumlah Halaman', max_length=100, widget=forms.IntegerField(attrs={'class': 'form-control', 'name':'num_pages'}))
+    num_pages = forms.IntegerField(label='Jumlah Halaman', widget=forms.NumberInput(attrs={'class': 'form-control', 'name':'num_pages'}))
     publisher = forms.CharField(label='Penerbit', max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'name':'publisher'}))
