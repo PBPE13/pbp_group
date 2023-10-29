@@ -4,19 +4,23 @@
 
 {% block content %}
 
-<h1>Edit Diary</h1>
+<br>
+<center><strong><h1 style="font-size: 18px;">Edit Diary</h1></strong></center>
+<br>
 
-<form method="POST">
+<center><form method="POST">
     {% csrf_token %}
     <table>
         {{ form.as_table }}
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="Edit Diary"/>
+                <br>
+                <center><input type="submit" value="Save Notes" class="btn btn-primary" data-bs-dismiss="modal" style="background-color: #0083B6; border-color: #0083B6;"/></center>
+                <br>
             </td>
         </tr>
     </table>
-</form>
+</form></center>
 
 {% endblock %}

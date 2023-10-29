@@ -5,10 +5,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import HttpResponseNotFound
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
-from .forms import DiaryForm
+from .forms import DiaryEditForm
 
 # Create your views here.
 def show_diary(request):
+
     diary = Diary.objects.filter(user=request.user)
     booksInDiaryCount = diary.count()
 
@@ -38,3 +39,20 @@ def add_diary_ajax(request):
         return HttpResponse(b"CREATED", status=201)
 
     return HttpResponseNotFound()
+
+def edit_diary(request, id):
+    diary = Diary.objects.get(pk=id)
+
+    form = DiaryEditForm(request.POST or None, instance=diary)
+    if form.is_valid() and request.method == "POST":
+
+        form.save()
+        return HttpResponseRedirect(reverse('diary:show_diary'))
+
+    context = {'form': form}
+    return render(request, "edit_diary.html", context)
+
+def delete_diary(request, id):
+    diary = Diary.objects.get(pk =id)
+    diary.delete()
+    return HttpResponseRedirect(reverse('diary:show_diary'))

@@ -7,4 +7,9 @@ class DiaryForm(ModelForm):
 
     class Meta:
         model = Diary
-        fields = ["finishDate", "notes", "title"]
+        fields = ["title", "finishDate", "notes"]
+
+class DiaryEditForm(ModelForm):
+    class Meta:
+        model = Diary
+        fields = ["notes"]

@@ -30,9 +30,17 @@
                 .text-muted i {
                     margin: 0 10px;
                 }
-                
-                pointer-events: none;
             }
+            .button-container {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+            }
+
+            h5 {
+                font-size: 18px;
+            }
+
         </style>
     </head>
 
@@ -72,7 +80,7 @@
                             
                             <div class="mb-3">
                                 <label for="finishDate" class="form-label">Finish Date</label>
-                                <input type="date" class="form-control" id="finishDate" name="finishDate">
+                                <input type="date" class="form-control" id="finishDate" name="finishDate" max="{{ today }}">
                             </div>
                             <div class="mb-3">
                                 <label for="notes" class="form-label">Notes</label>
@@ -94,18 +102,17 @@
             async function getBook() {
                 return fetch("{% url 'book:get_books' %}").then((res) => res.json())
             }
-
+        
             async function getDiary() {
                 return fetch("{% url 'diary:get_diary_json' %}").then((res) => res.json())
             }
-
+        
             async function makeDropdown() {
                 const bookDropdown = document.getElementById("title");
                 bookDropdown.innerHTML = '<option value="" selected disabled>Select a Book</option>';
-
+        
                 const books = await getBook();
-                console.log(books); 
-
+        
                 books.forEach(book => {
                     const option = document.createElement("option");
                     option.value = book.fields.title;
@@ -113,47 +120,84 @@
                     bookDropdown.appendChild(option);
                 });
             }
-
+        
             makeDropdown();
 
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('finishDate').max = today;
+        
             async function refreshDiary() {
-                document.getElementById("diary_cards").innerHTML = ""
+                const diaryCards = document.getElementById("diary_cards");
+                diaryCards.innerHTML = "";
+        
                 const diaries = await getDiary();
+        
+                diaries.forEach(diaryElement => {
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+        
+                    const cardBody = document.createElement("div");
+                    cardBody.classList.add("card-body");
 
-                let htmlString = '<div class="card-columns">';
+                    const buttonContainer = document.createElement("div");
+                    buttonContainer.classList.add("button-container");
+        
+                    const cardTitle = document.createElement("h5");
+                    cardTitle.classList.add("card-title");
+                    cardTitle.textContent = diaryElement.fields.title;
+        
+                    const cardText = document.createElement("p");
+                    cardText.classList.add("card-text");
+                    cardText.textContent = diaryElement.fields.notes;
+        
+                    const finishDate = document.createElement("p");
+                    finishDate.classList.add("card-text");
+                    finishDate.classList.add("text-muted");
+                    finishDate.innerHTML = `<i class="fas fa-calendar-alt"></i>Finish reading date: ${diaryElement.fields.finishDate}`;
+        
+                    const editButton = document.createElement("button");
+                    editButton.classList.add("action-button");
+                    editButton.textContent = "Edit Notes";
+                    editButton.addEventListener("click", () => {
+                        window.location.href = `/diary/edit-diary/${diaryElement.pk}`;
+                    });
 
-                diaries.forEach((diary) => {
-                    htmlString += `<div class="card">
-                        <a href="#">
-                            <img class="card-img-top" src="https://images.saymedia-content.com/.image/t_share/MTc0MjYyNTc5Mjg2MjU1MTAw/10-books-over-1000-pages-to-read.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">${diary.fields.title}</h5>
-                                <p class="card-text">${diary.fields.notes}</p>
-                            <p class="card-text"><small class="text-muted"><i class="fas fa-calendar-alt"></i>Finish date: ${diary.fields.finishDate}</small></p>
-                    </div>
-                        </a>
-                    </div>`;
-                document.getElementById("diary_cards").innerHTML = htmlString 
+                    const deleteButton = document.createElement("button");
+                    deleteButton.classList.add("action-button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.addEventListener("click", () => {
+                        window.location.href = `/diary/delete-diary/${diaryElement.pk}`;
+                    });
+        
+                    cardBody.appendChild(cardTitle);
+                    cardBody.appendChild(cardText);
+                    cardBody.appendChild(finishDate);
+
+                    buttonContainer.appendChild(editButton);
+                    buttonContainer.appendChild(deleteButton);
+        
+                    card.appendChild(cardBody);
+                    card.appendChild(buttonContainer);
+                    diaryCards.appendChild(card);
                 });
             }
-
+        
             refreshDiary();
-
+        
             function addDiary() {
-
                 fetch("{% url 'diary:add_diary_ajax' %}", {
                     method: "POST",
                     body: new FormData(document.querySelector('#diaryForm')),
                 })
                 .then(refreshDiary)
-                    
+        
                 document.getElementById("diaryForm").reset();
-                return false
+                return false;
             }
-
-            document.getElementById("button_add").onclick = addDiary
-
-        </script>
+        
+            document.getElementById("button_add").onclick = addDiary;
+        
+        </script>        
 
     </body>
 </html>
