@@ -6,6 +6,7 @@ from django.http import HttpResponseNotFound
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.urls import reverse
+from django.core import serializers
 from book.models import Book
 from book_review.models import Review
 from .forms import ReviewForm
@@ -53,3 +54,7 @@ def delete_review(request, review_id):
         review.delete()
         return HttpResponseRedirect(reverse('book_review:review_list'))
     return HttpResponseNotFound()
+
+def get_review_json(request):
+    review = Review.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', review))

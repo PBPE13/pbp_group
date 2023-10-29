@@ -2,34 +2,183 @@
 
 {% block content %}
 <br />
-    <div class="container-review">
-        <center><strong><h1 style="font-size: 28px;">Reviews On {{ title }}</h1></strong></center>
+<div class="container-review">
+    <center><strong><h1 style="font-size: 28px;">Reviews On {{ title }}</h1></strong></center>
 
-        <br />
+    <br />
 
-        {% if user.is_authenticated %}
-            <div class="text-center mb-3">
-                <a href="{% url 'add_review' id %}" class="btn btn-primary">Add Review</a>
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="reviewModalLabel">Add New Review</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="Username" class="col-form-label">Username</label>
+                            <input type="text" class="form-control" id="Username" name="Username"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rating" class="col-form-label">Rating</label>
+                            <select class="form-control" id="rating" name="rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewDate" class="col-form-label">Review Date</label>
+                            <input type="datetime-local" class="form-control" id="reviewDate" name="review_date"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Content</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Review</button>
+                </div>
             </div>
-        {% endif %}
+        </div>
+    </div>
+    
+    <div class="modal fade" id="editReviewModal" tabindex="-1" aria-labelledby="editReviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editReviewModalLabel">Edit Review</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="reviewId">
+                    <div class="mb-3">
+                        <label for="editRating" class="col-form-label">Rating</label>
+                        <select class="form-control" id="editRating" name="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editReviewDate" class="col-form-label">Review Date</label>
+                        <input type="datetime-local" class="form-control" id="editReviewDate" name="review_date"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editContent" class="col-form-label">Content</label>
+                        <textarea class="form-control" id="editContent" name="content"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editReviewSubmit">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
-        {% for review in reviews %}
-            <div class="review">
-                <h2>{{ review.title }}</h2>
-                <p><strong>Reviewed by:</strong> {{ review.user.username }}</p>
-                <p><strong>Rating:</strong> {{ review.rating }}/5</p>
-                <p><strong>Date:</strong> {{ review.review_date|date:"d M Y" }}</p>
-                <p>{{ review.content }}</p>
+    {% if user.is_authenticated %}
+        <div class="text-center mb-3">
+            <button class="btn btn-primary" id="addReviewButton">Add Review</button>
+        </div>
+    {% endif %}
+
+    {% for review in reviews %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ review.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Reviewed by: {{ review.user.username }}</h6>
+                <p class="card-text"><strong>Rating:</strong> {{ review.rating }}/5</p>
+                <p class="card-text"><strong>Date:</strong> {{ review.review_date|date:"d M Y" }}</p>
+                <p class="card-text">{{ review.content }}</p>
 
                 {% if user.is_authenticated and user == review.user %}
                     <a href="{% url 'edit_review' review.id %}" class="btn btn-primary">Edit</a>
                     <a href="{% url 'delete_review' review.id %}" class="btn btn-danger">Delete</a>
                 {% endif %}
             </div>
-        {% empty %}
-            <p style="text-align: center;">No reviews available.</p>
-        {% endfor %}
-        <br />
+        </div>
+    {% empty %}
+        <p style="text-align: center;">No reviews available.</p>
+    {% endfor %}
+    <br />
     </div>
+    
+    <script>
+        document.getElementById("addReviewButton").addEventListener("click", function() {
+            var modal = new bootstrap.Modal(document.getElementById('reviewModal'));
+            modal.show();
+        });
+        function openEditModal(reviewId, rating, content) {
+            document.getElementById('reviewId').value = reviewId;
+            document.getElementById('editRating').value = rating;
+            document.getElementById('editContent').value = content;
+
+            const editReviewModal = new bootstrap.Modal(document.getElementById('editReviewModal'));
+            editReviewModal.show();
+        }
+
+        function editReview() {
+            console.log("Edit button clicked");
+
+            const reviewId = document.getElementById('reviewId').value;
+            const rating = document.getElementById('editRating').value;
+            const content = document.getElementById('editContent').value;
+
+            console.log("Data retrieved from the form:", reviewId, rating, content);
+
+            fetch(`#`.replace('0', reviewId), {
+                method: "POST",
+                body: new URLSearchParams({
+                    rating: rating,
+                    content: content,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+            .then((response) => {
+                console.log("Response status:", response.status);
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(`Server returned status ${response.status}`);
+                }
+            })
+            .then((data) => {
+                console.log("Response data:", data);
+
+                if (data.message === "Review updated successfully") {
+                    $('#editReviewModal').modal('hide');
+                } else {
+                    alert("Edit failed. Please try again.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error while editing review:", error);
+                alert("Edit failed. Please try again.");
+            });
+        }
+
+        document.getElementById("editReviewSubmit").addEventListener("click", function(event) {
+            console.log("Save Changes button clicked");
+
+            event.preventDefault();
+            editReview();
+        });
+    </script>
+    
+</div>
 {% endblock content %}
 
