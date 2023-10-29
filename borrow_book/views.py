@@ -26,15 +26,17 @@ def get_borrow(request):
 @csrf_exempt
 def borrow_book(request):
     if request.method == 'POST':
-        id = request.POST.get("id")
-        book = get_object_or_404(Book, pk =id)
+        formData = request.POST
+        bookId = formData.get('id')
         borrower = request.user
-        return_date = request.POST.get("return_date")
-
-        borrow = Borrow(book=book, borrower=borrower, borrow_date=datetime.date.today , return_date=return_date)
-        book.status = False
+        return_date = formData.get("return_date")
+        book = get_object_or_404(Book, id=bookId)
+        
+        borrow = Borrow.objects.create(book=book, borrower=borrower, borrow_date=datetime.date.today , return_date=return_date)
         borrow.save()
-
+        book.status = False
+        book.save()
+        
         return HttpResponse(b"CREATED", status= 201)
     
     return HttpResponseNotFound()
