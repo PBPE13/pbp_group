@@ -32,14 +32,14 @@
             <div class="modal-body">
                 <form id="form" onsubmit="return false;">
                     {% csrf_token %}
-                    <input type="hidden" id="bookId" name="bookId">
+                    <input type="hidden" id="borrowbookId" name="bookId">
                     <div class="mb-3">
                         <label for="borrower" class="col-form-label">Borrower:</label>
                         <label for="borrower" class="col-form-label">{{borrower}}</label>
                     </div>
                     <div class="mb-3">
                         <label for="Title" class="col-form-label">Title:</label>
-                        <label for="Title" class="col-form-label" id="title"></label>
+                        <label for="Title" class="col-form-label" id="borrowtitle"></label>
                     </div>
                     <div class="mb-3">
                         <label for="borrow_date" class="col-form-label">Borrow Date:</label>
@@ -64,18 +64,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="detailModalLabel"><b>Book Detail</b></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" class="text-gray-700"></button>
             </div>
             <div class="modal-body">
                 <form id="form" onsubmit="return false;">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="bookId" class="col-form-label"><b>Book Id:</b></label>
-                        <label for="bookId" class="col-form-label" id="bookId"></label>
+                        <label for="bookId" class="col-form-label" id="detailbookId"></label>
                     </div>
                     <div class="mb-3">
                         <label for="title" class="col-form-label"><b>Title:</b></label>
-                        <label for="title" class="col-form-label" id="title"></label>
+                        <label for="title" class="col-form-label" id="detailtitle"></label>
                     </div>
                     <div class="mb-3">
                         <label for="Authors" class="col-form-label"><b>Authors:</b></label>
@@ -128,7 +128,7 @@
                             <ul class="list-none bg-white rounded-b-lg">
                                 <li class="text-gray-700 text-base px-6 py-4">Rating: ${item.fields.average_rating}</li>
                             </ul>
-                            <a onclick= "openDetailModal('${item.fields.bookId}','${item.fields.title}', '${item.fields.authors}', '${item.fields.average_rating}', '${item.fields.language_code}', '${item.fields.num_pages}', '${item.fields.publication_date}', '${item.fields.publisher}')">
+                            <a onclick= "openDetailModal('${item.fields.bookID}','${item.fields.title}','${item.fields.authors}', '${item.fields.average_rating}', '${item.fields.language_code}', '${item.fields.num_pages}', '${item.fields.publication_date}', '${item.fields.publisher}')">
                                 <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Detail</button>
                             </a>
                             <a onclick= "openBorrowModal(${item.pk},'${item.fields.title}')">
@@ -165,9 +165,9 @@
 
     refreshBooks();
 
-    async function openDetailModal(bookId, title, authors, average_rating, language_code, num_pages, publication_date, publisher ){
-        document.getElementById('bookId').innerText = bookId;
-        document.getElementById('title').innerText = title;
+    async function openDetailModal(bookId, title, authors, average_rating, language_code, num_pages, publication_date, publisher){
+        document.getElementById('detailbookId').innerText = bookId;
+        document.getElementById('detailtitle').innerText = title;
         document.getElementById('authors').innerText = authors;
         document.getElementById('average_rating').innerText = average_rating;
         document.getElementById('language_code').innerText = language_code;
@@ -180,8 +180,8 @@
     }
 
     async function openBorrowModal(bookId, title){
-        document.getElementById('bookId').value = bookId;
-        document.getElementById('title').innerText = title;
+        document.getElementById('borrowbookId').value = bookId;
+        document.getElementById('borrowtitle').innerText = title;
 
         const borrowModal = new bootstrap.Modal(document.getElementById('borrowModal'));
         borrowModal.show();

@@ -34,6 +34,9 @@
                 margin-right: 30px;
                 margin-bottom: 30px;
             }
+            .centered-text {
+                line-height: 0rem;
+            }
             .card {
                 font-weight: bold;
                 margin-left: 30px;
@@ -54,13 +57,13 @@
     </head>
 
     <body>
-        <nav class="border-b">
+        <nav class="fixed top-0 w-full z-50 border-b bg-white">
             <div class="max-w-6xl mx-auto px-4">
                 <div class="flex justify-between items-center">
                     <a href="" class="font-bold text-2xl">Literatour</a>
                     <form class="d-flex items-center">
                         <input class="form-control me-2 h-8" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success h-8" type="submit">Search</button>
+                        <button class="btn btn-outline-success h-8 centered-text" type="submit">Search</button>
                     </form>                    
                     <div class="flex space-x-7 items-center">
                         <div class="hidden md:flex items-center space-x-1">
@@ -69,7 +72,7 @@
                                 {% if user.profile.status == 'A' %}
                                     <a href="{% url 'book:add_books' %}" class="py-4 px-2 font-semibold hover:text-gray-500">Add Buku</a>
                                 {% else %}
-                                    <a href="{% url 'borrow_book:show_borrow' %}" class="py-4 px-2 font-semibold hover:text-gray-500">Borrow Book</a>
+                                    <a href="{% url 'borrow_book:show_borrow' %}" class="py-4 px-2 font-semibold hover:text-gray-500">Pinjam Buku</a>
                                     <a href="{% url 'diary:show_diary' %}" class="py-4 px-2 font-semibold hover:text-gray-500">Diary</a>
                                     <a href="{% url 'forum:Forum' %}" class="py-4 px-2 font-semibold hover:text-gray-500">Forum</a>
                                 {% endif %}
@@ -79,7 +82,7 @@
                     </div>
                     <div class="hidden md:flex items-center space-x-3 ">
                         {% if user.is_authenticated %}        
-                        <a class="py-4 px-2 text-teal-500 font-semibold" href="#">Hai, {{ user.username }}!</a>
+                        <a class="py-4 px-2 text-blue-500 font-semibold" href="#">Hai, {{ user.username }}!</a>
                         <a href="{% url 'main:logout' %}" class="py-2 px-2 font-medium bg-red-500 text-white rounded-xl hover:bg-red-700">Logout</a>
                         {% else %}
                         <a href="{% url 'main:register' %}" id="signupbutton" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl hover:bg-blue-700">Register</a>
@@ -88,10 +91,10 @@
 					</div>
                     <div class="md:hidden flex items-center">
                         {% if user.is_authenticated %}     
-                        <a class="py-4 px-2 text-teal-500 font-semibold">Hai, {{ user.username }}!</a>
+                        <a class="py-4 px-2 text-blue-500 font-semibold">Hai, {{ user.username }}!</a>
                         {% endif %}
 						<button class="outline-none mobile-menu-button">
-						<svg class=" w-6 h-6 text-gray-500 hover:text-green-500 "
+						<svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 "
 							x-show="!showMenu"
 							fill="none"
 							stroke-linecap="round"
@@ -139,8 +142,10 @@
 				});
 			</script>
         </nav>
+        <div class="pt-16">
         {% block content %}
         {% endblock content %}
+        </div>
         <footer class="bg-white rounded-lg shadow-xl border-1 dark:bg-gray-800">
             <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
               <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="/" class="hover:underline">Literatour™</a>. All Rights Reserved.
