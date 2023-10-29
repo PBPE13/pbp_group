@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
@@ -13,7 +14,6 @@
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display">
         <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
         <title>Literatour | Forum</title>
         <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
         <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
@@ -163,28 +163,22 @@
                                                         <div>
                                                             <form id="post-form" action="" method="POST" > 
                                                                 {% csrf_token %}
-                                                                <!-- Topic input-->
                                                                 <div class="form-floating mb-3">
                                                                     <input class="form-control" id="topic" name="topic" type="text" placeholder="Enter the topic...">
                                                                     <label for="topic">Topic</label>
                                                                 </div>
-                                                                <!-- Description input-->
                                                                 <div class="form-floating mb-3">
                                                                     <textarea class="form-control" id="description" name="description" type="text" placeholder="Enter your message here..." style="height: 6rem"></textarea>
                                                                     <label for="description">Description</label>
                                                                 </div>
-                                                                <!-- Submit Button-->
-                                                                <!-- Example single danger button -->
-                                                                <!-- Example single danger button -->
                                                                 <p style="float: left; margin-bottom: 0.5rem; font-weight: bold;"> Book Title: </p>
-                                                                <!-- Example single danger button -->
                                                                 <select id = "title" name="title"  class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                                     {% for book in books %}
                                                                         <option>{{book.title}}</option>
                                                                     {% endfor %}
                                                                 </select>
                                                             </form>
-                                                            <button id="add-comment" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl" style="margin-top: 1.5rem; width: 60px;">Add</button>
+                                                            <button id="add-post" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl" style="margin-top: 1.5rem; width: 60px;">Add</button>
                                                         </div>
                                                     </div>
                                                 </div>
