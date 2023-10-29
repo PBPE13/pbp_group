@@ -14,6 +14,9 @@ import datetime
 def show_main(request):
     return render(request, "main.html")
 
+def show_home(request):
+    return render(request, "home.html")
+
 def register(request):
     form = RegisterForm()
 
