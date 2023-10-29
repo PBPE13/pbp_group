@@ -7,4 +7,4 @@ class Borrow(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     borrow_date = models.DateField(auto_now_add=True)
     return_date = models.DateField(null=True, blank=True)
-
+    status = models.BooleanField(default=False)

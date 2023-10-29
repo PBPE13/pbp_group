@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.core import serializers
+from django.urls import reverse
 from borrow_book.models import Borrow
 from book.models import Book
 from django.views.decorators.csrf import csrf_exempt
@@ -22,25 +23,25 @@ def get_borrow(request):
     borrows = Borrow.objects.filter(borrower=request.user)
     return HttpResponse(serializers.serialize('json', borrows))
 
-
+@csrf_exempt
 def borrow_book(request, id):
     if request.method == 'POST':
         book = get_object_or_404(Book, pk =id)
         borrower = request.user
         return_date = request.POST.get("return_date")
 
-        borrow = Borrow(book= book, borrower = borrower, borrow_date = datetime.date.today , return_date = return_date )
+        borrow = Borrow(book=book, borrower=borrower, borrow_date=datetime.date.today , return_date=return_date, status=True)
         borrow.save()
 
-        return HttpResponse(status= 201)
+        return HttpResponse(b"CREATED", status= 201)
     
     return HttpResponseNotFound()
 
 def return_book(request, id):
+    book = Book.objects.get(pk = id)
+    borrowed = Borrow.objects.filter(book=book)
     if request.method == 'POST':
-        borrow = get_object_or_404(Borrow, pk=id)
-        book = borrow.book
-        Borrow.objects.get(pk= id).delete()
-        return HttpResponse(b"DELETED", status=201)
+        borrowed.delete()
+        return HttpResponseRedirect(reverse('book_list:show_borrow'))
     
     return HttpResponseNotFound()
