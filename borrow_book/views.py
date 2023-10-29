@@ -24,8 +24,9 @@ def get_borrow(request):
     return HttpResponse(serializers.serialize('json', borrows))
 
 @csrf_exempt
-def borrow_book(request, id):
+def borrow_book(request):
     if request.method == 'POST':
+        id = request.POST.get("id")
         book = get_object_or_404(Book, pk =id)
         borrower = request.user
         return_date = request.POST.get("return_date")
