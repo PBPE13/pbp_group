@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h1>{{name}}'s Diary</h1>
 
 <center><p>Total entries in the diary: {{ booksInDiaryCount }} </p></center>
@@ -79,8 +80,8 @@
 
         diaries.forEach((diary) => {
             htmlString += `<li>
-                <div class="card" style="background-color: #E3E9F3; margin-right: 10;">
-                    <div class="card_content">
+                <div class="card" style="background-color: #E3E9F3; display: flex; flex-wrap: wrap; justify-content: space-between;">
+                    <div class="card_content" style="flex-basis: calc(33.33% - 10px); margin: 5px;">
                         <h2 class="card_title">${diary.fields.title}</h2>
                         <div class="card_text">
                             <p><span class="note">Finish date: ${diary.fields.finishDate}</span></p>

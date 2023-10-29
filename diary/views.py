@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.urls import reverse
 from .models import Diary
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.http import HttpResponseNotFound
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
+from .forms import DiaryForm
 
 # Create your views here.
 def show_diary(request):
@@ -36,3 +38,22 @@ def add_diary_ajax(request):
         return HttpResponse(b"CREATED", status=201)
 
     return HttpResponseNotFound()
+
+# def edit_diary(request, id):
+#     product = Diary.objects.get(pk = id)
+
+#     form = DiaryForm(request.POST or None, instance=product)
+
+#     if form.is_valid() and request.method == "POST":
+#         form.save()
+#         return HttpResponseRedirect(reverse('diary:show_diary'))
+
+#     context = {'form': form}
+#     return render(request, "edit_diary.html", context)
+
+# def delete_diary(request, id):
+#     diary = Diary.objects.get(pk = id)
+#     # Hapus data
+#     diary.delete()
+#     # Kembali ke halaman awal
+#     return HttpResponseRedirect(reverse('diary:show_diary'))
