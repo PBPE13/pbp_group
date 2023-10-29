@@ -6,3 +6,4 @@ requests
 urllib3
 requests
 django-widget-tweaks
+django-environ
