@@ -44,11 +44,10 @@
       * Button Borrow dan Return muncul berdasarkan status buku
       * Button cancel action
    
-   6. Reading List Page
-      * Menampilkan buku yang dipinjam (Card)
-      * Menulis tanggal dan buku yang dibaca pada tanggal tersebut
-      * Koleksi buku yang sedang dibaca
-      * Koleksi buku yang sudah dikembalikan
+   6. Reading List Page (Diary)
+      * Menampilkan buku yang telah dibaca (Card)
+      * Menulis tanggal selesai membaca
+      * Menulis notes mengenai buku
    
    7. Forum Page
       * Display message dari berbagai user dalam satu page

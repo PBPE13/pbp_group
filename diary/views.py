@@ -5,9 +5,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import HttpResponseNotFound
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from .forms import DiaryEditForm
 
 # Create your views here.
+@login_required(login_url='main:login')
 def show_diary(request):
 
     diary = Diary.objects.filter(user=request.user)
