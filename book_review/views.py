@@ -1,16 +1,22 @@
-from django.shortcuts import render
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Book, Review
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect
+from django.http import HttpResponseNotFound
+from django.http import HttpResponse
+from django.http import JsonResponse
+from django.urls import reverse
+from book.models import Book
+from book_review.models import Review
 from .forms import ReviewForm
 
+@csrf_exempt
 def review_list(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     reviews = Review.objects.filter(book=book)
-    return render(request, 'reviews/review_list.html', {'book': book, 'reviews': reviews})
+    return render(request, 'review_list.html', {'book': book, 'reviews': reviews, 'title': book.title, 'id': book.pk})
 
-@login_required
+@csrf_exempt
 def add_review(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     if request.method == 'POST':
@@ -20,27 +26,30 @@ def add_review(request, book_id):
             review.book = book
             review.user = request.user
             review.save()
-            return redirect('review_list', book_id=book.id)
+            return HttpResponse(b"CREATED", status=201)
     else:
         form = ReviewForm()
-    return render(request, 'reviews/add_review.html', {'form': form, 'book': book})
+    return HttpResponseNotFound()
 
-@login_required
+@csrf_exempt
 def edit_review(request, review_id):
     review = get_object_or_404(Review, pk=review_id, user=request.user)
     if request.method == 'POST':
-        form = ReviewForm(request.POST, instance=review)
-        if form.is_valid():
-            form.save()
-            return redirect('review_list', book_id=review.book.id)
+        try:
+            form = ReviewForm(request.POST, instance=review)
+            if form.is_valid():
+                form.save()
+                return JsonResponse({"message": "Review updated successfully"}, status=200)
+        except Review.DoesNotExist:
+            return JsonResponse({"error": "Review not found"}, status=404)
     else:
         form = ReviewForm(instance=review)
-    return render(request, 'reviews/edit_review.html', {'form': form, 'review': review})
+    return JsonResponse({"error": "Invalid request method"}, status=405)
 
-@login_required
+@csrf_exempt
 def delete_review(request, review_id):
     review = get_object_or_404(Review, pk=review_id, user=request.user)
-    book_id = review.book.id
-    review.delete()
-    return redirect('review_list', book_id=book_id)
-
+    if request.method == 'POST':
+        review.delete()
+        return HttpResponseRedirect(reverse('book_review:review_list'))
+    return HttpResponseNotFound()

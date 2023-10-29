@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book Reviews</title>
-    <link rel="stylesheet" href="<!-- your stylesheet link here -->">
-    <!-- Add any other head elements here -->
-</head>
-<body>
-    <div class="container">
-        <h1>Book Reviews</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<br />
+    <div class="container-review">
+        <center><strong><h1 style="font-size: 28px;">Reviews On {{ title }}</h1></strong></center>
+
+        <br />
+
+        {% if user.is_authenticated %}
+            <div class="text-center mb-3">
+                <a href="{% url 'add_review' id %}" class="btn btn-primary">Add Review</a>
+            </div>
+        {% endif %}
 
         {% for review in reviews %}
             <div class="review">
@@ -19,13 +22,14 @@
                 <p>{{ review.content }}</p>
 
                 {% if user.is_authenticated and user == review.user %}
-                    <a href="{% url 'edit_review_url' review.id %}" class="btn btn-primary">Edit</a>
-                    <a href="{% url 'delete_review_url' review.id %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'edit_review' review.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_review' review.id %}" class="btn btn-danger">Delete</a>
                 {% endif %}
             </div>
         {% empty %}
-            <p>No reviews available.</p>
+            <p style="text-align: center;">No reviews available.</p>
         {% endfor %}
+        <br />
     </div>
-</body>
-</html>
+{% endblock content %}
+

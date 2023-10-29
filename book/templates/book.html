@@ -31,8 +31,12 @@
                             </div>
                             <ul class="list-none bg-white rounded-b-lg">
                                 <li class="text-gray-700 text-base px-6 py-4">Rating: ${item.fields.average_rating}</li>
+                                <li class="px-6 py-4">
+                                <a href="/review/${item.pk}/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Reviews
+                                </a>
+                            </li>
                             </ul>
-                            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Borrow</button>
                         </div>
                     </div>`;
                 

@@ -1,8 +1,5 @@
 from django.db import models
 from book.models import Book
-
-from django.db import models
-from book.models import Book
 from django.contrib.auth.models import User
 
 class Review(models.Model):

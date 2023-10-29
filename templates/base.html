@@ -49,6 +49,14 @@
                 margin-right: 30px;
                 margin-left: 30px;
             }
+            .container-review {
+                margin-left: 25px;
+                margin-right: 30px;
+            }
+            .user-profile {
+                margin-top:35px;
+                margin-bottom:35px;
+            }
             body {
                 background-color: rgb(255, 255, 255);
             }
@@ -82,7 +90,7 @@
                     </div>
                     <div class="hidden md:flex items-center space-x-3 ">
                         {% if user.is_authenticated %}        
-                        <a class="py-4 px-2 text-blue-500 font-semibold" href="#">Hai, {{ user.username }}!</a>
+                        <a class="py-4 px-2 text-blue-500 font-semibold" href="{% url 'main:profile_user' %}">Hai, {{ user.username }}!</a>
                         <a href="{% url 'main:logout' %}" class="py-2 px-2 font-medium bg-red-500 text-white rounded-xl hover:bg-red-700">Logout</a>
                         {% else %}
                         <a href="{% url 'main:register' %}" id="signupbutton" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl hover:bg-blue-700">Register</a>
@@ -91,7 +99,7 @@
 					</div>
                     <div class="md:hidden flex items-center">
                         {% if user.is_authenticated %}     
-                        <a class="py-4 px-2 text-blue-500 font-semibold">Hai, {{ user.username }}!</a>
+                        <a class="py-4 px-2 text-blue-500 font-semibold" href="{% url 'main:profile_user' %}">Hai, {{ user.username }}!</a>
                         {% endif %}
 						<button class="outline-none mobile-menu-button">
 						<svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 "

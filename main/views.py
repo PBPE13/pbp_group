@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from main.models import Profile
 from main.forms import RegisterForm, LoginForm
@@ -7,7 +7,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 import datetime
 
 
@@ -58,3 +57,7 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+@login_required
+def profile_user(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    return render(request, 'profile.html', {'profile': profile})
