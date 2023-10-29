@@ -59,6 +59,53 @@
     </div>
 </div>
 
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detailModalLabel"><b>Book Detail</b></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="bookId" class="col-form-label"><b>Book Id:</b></label>
+                        <label for="bookId" class="col-form-label" id="bookId"></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="title" class="col-form-label"><b>Title:</b></label>
+                        <label for="title" class="col-form-label" id="title"></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Authors" class="col-form-label"><b>Authors:</b></label>
+                        <label for="Authors" class="col-form-label" id="authors"></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="average_rating" class="col-form-label"><b>Average Rating:</b></label>
+                        <label for="average_rating" class="col-form-label" id="average_rating"></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="language_code" class="col-form-label"><b>Language Code</b></label>
+                        <label for="language_code" class="col-form-label" id="language_code"></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="num_pages" class="col-form-label"><b>Number Pages:</b></label>
+                        <label for="num_pages" class="col-form-label" id="num_pages"></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="publication_date" class="col-form-label"><b>Publication Date</b></label>
+                        <label for="publication_date" class="col-form-label" id="publication_date"></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="publisher" class="col-form-label"><b>Publisher:</b></label>
+                        <label for="publisher" class="col-form-label" id="publisher"></label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     async function getBooks() {
@@ -81,6 +128,9 @@
                             <ul class="list-none bg-white rounded-b-lg">
                                 <li class="text-gray-700 text-base px-6 py-4">Rating: ${item.fields.average_rating}</li>
                             </ul>
+                            <a onclick= "openDetailModal('${item.fields.bookId}','${item.fields.title}', '${item.fields.authors}', '${item.fields.average_rating}', '${item.fields.language_code}', '${item.fields.num_pages}', '${item.fields.publication_date}', '${item.fields.publisher}')">
+                                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Detail</button>
+                            </a>
                             <a onclick= "openBorrowModal(${item.pk},'${item.fields.title}')">
                                 <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Borrow</button>
                             </a>
@@ -114,6 +164,20 @@
     });
 
     refreshBooks();
+
+    async function openDetailModal(bookId, title, authors, average_rating, language_code, num_pages, publication_date, publisher ){
+        document.getElementById('bookId').innerText = bookId;
+        document.getElementById('title').innerText = title;
+        document.getElementById('authors').innerText = authors;
+        document.getElementById('average_rating').innerText = average_rating;
+        document.getElementById('language_code').innerText = language_code;
+        document.getElementById('num_pages').innerText = num_pages;
+        document.getElementById('publication_date').innerText = publication_date;
+        document.getElementById('publisher').innerText = publisher;
+
+        const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+        detailModal.show();
+    }
 
     async function openBorrowModal(bookId, title){
         document.getElementById('bookId').value = bookId;
