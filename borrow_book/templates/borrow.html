@@ -230,7 +230,7 @@
                                 <li class="list-group-item">Tanggal Peminjaman: ${item.fields.borrow_date}</li>
                                 <li class="list-group-item">Tanggal Pengembalian: ${item.fields.return_date}</li>
                             </ul>
-                            <button type="button" class="btn btn-sm btn-primary">Return</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="returnBook(${item.pk})">Return</button>
                         </div>
                     </div>`;
                 const row = document.querySelector(".row");
@@ -238,6 +238,20 @@
             }
         });
     }
+
+    async function returnBook(id){
+        const formData = new FormData()
+        formData.append("id", id)
+        fetch("{% url 'borrow_book:return_book' %}", {
+            method: "POST",
+            body: formData
+        }).then(() => {
+            refreshBooks();
+            refreshBorrow();
+        });
+        return false
+    }
+
     refreshBooks();
     refreshBorrow();
 </script>
