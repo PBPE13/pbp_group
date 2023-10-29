@@ -37,8 +37,7 @@ def get_forum_json(request):
 def index(request):
     forumPost = ForumPost.objects.all().order_by('-date')
     books = Book.objects.all().order_by('title')
-    user = User.objects.all()
-    response = {'forumPost': forumPost , 'books':books, "user": user}
+    response = {'forumPost': forumPost , 'books':books}
     return render(request, 'forumPage.html', response)
 
 @csrf_exempt
