@@ -38,22 +38,3 @@ def add_diary_ajax(request):
         return HttpResponse(b"CREATED", status=201)
 
     return HttpResponseNotFound()
-
-# def edit_diary(request, id):
-#     product = Diary.objects.get(pk = id)
-
-#     form = DiaryForm(request.POST or None, instance=product)
-
-#     if form.is_valid() and request.method == "POST":
-#         form.save()
-#         return HttpResponseRedirect(reverse('diary:show_diary'))
-
-#     context = {'form': form}
-#     return render(request, "edit_diary.html", context)
-
-# def delete_diary(request, id):
-#     diary = Diary.objects.get(pk = id)
-#     # Hapus data
-#     diary.delete()
-#     # Kembali ke halaman awal
-#     return HttpResponseRedirect(reverse('diary:show_diary'))
