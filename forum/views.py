@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from requests import Response
-from forum.models import ForumPost
-from .forms import *
-from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
+from book.models import Book
+from forum.models import Comment, ForumPost
+from .forms import ForumForm, CommentForm
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -37,6 +39,7 @@ def get_forum_json(request):
 def index(request):
     forumPost = ForumPost.objects.all().order_by('-date')
     books = Book.objects.all().order_by('title')
+    
     response = {'forumPost': forumPost , 'books':books}
     return render(request, 'forumPage.html', response)
 
@@ -119,7 +122,8 @@ def add_comment_ajax(request, id):
 
 def forum_post_detail(request,id):
     forumPost = ForumPost.objects.get(pk=id)
-    return render(request, 'forumDetail.html', {'forumPost':forumPost})
+    commentForm = CommentForm()
+    return render(request, 'forumDetail.html', {'forumPost':forumPost, 'commentForm':commentForm})
 
 
 @login_required(login_url='/login')
@@ -204,3 +208,4 @@ def delete_comment(request, id):
         comment = get_object_or_404(Comment, id=id)
         comment.delete()
     return HttpResponse(status=202)
+

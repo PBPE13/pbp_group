@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+<style>
+    
+    h1, h2 {
+      font-family: "Mulish"
+    }
+  
+    h3, h4  {
+      font-family: "Playfair Display"
+    }
+  
+    h5, p {
+      font-family: "Manrope"
+    }
+  
+  </style>
+  
+  {% load static %}
+  {% block meta %}
+  {% endblock meta %}
+  {% block content %}
+  <!DOCTYPE html>
+  <html style="font-size: 16px;" lang="en"><head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta name="generator" content="Nicepage 4.20.1, nicepage.com">
+      <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+      <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display">
+      <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+
+    </head>
+    
+    <body style="align-items: center;">
+      <section class="u-align-center u-clearfix u-image u-shading u-section-1">
+        <div class="u-clearfix u-sheet u-sheet-1" style="align-items: center;">
+          <h1 class="u-text u-title u-text-1" style="font-family:Playfair; font-weight:bold;" >Welcome to Literatour!</h1>
+          <p class="u-large-text u-text u-text-variant u-text-2">Join us in celebrating the joy of reading and connect with fellow book lovers today.</p>
+        </div>
+      </section>
+      
+    </body>
+  {% endblock content %}
+  </html>
+  <style>
+    .btn-primary:hover {
+      background-color: rgb(63, 24, 24);
+    }
+    
+    .navbar-brand {
+    letter-spacing: 3px;
+    font-size: 27px;
+    font-weight: 500;
+    }
+    .navbar-brand, .nav-link, .fa-bars {
+    color: #fff;
+    }
+    
+    .navbar-brand:hover {
+      color: rgb(255, 255, 255);
+    }
+    
+    .nav-link:hover {
+      color: rgba(255, 255, 255, 0.683);
+    }
+    
+    
+    @media (max-width: 450px) {
+    #intro {
+      height: 950px !important;
+    }
+    }
+    
+    @media (min-width: 550px) and (max-width: 750px) {
+    #intro {
+      height: 1100px !important;
+    }
+    }
+    
+    @media (min-width: 800px) and (max-width: 990px) {
+    #intro {
+      height: 600px !important;
+    }
+    }
+    
+    .display-1 {
+    font-weight: 500 !important;
+    letter-spacing: 40px;
+    }
+    
+    @media (min-width: 1600px) {
+    .display-1 {
+      font-size: 10rem;
+    }
+    }
+  </style>

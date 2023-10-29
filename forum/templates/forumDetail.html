@@ -191,15 +191,14 @@
                                 <h2 style="margin:20px 20px">Comments</h2>
                                     
                                     <!-- new comments -->
-                                    <form action="" method="POST" id="post-form"> {% csrf_token %}
+                                    <form action="" method="POST" id="post-form"> 
                                         <!-- Description input-->
-                                        <div class="form-floating mb-3" style="margin:40px 40px">
-                                            <textarea class="form-control" id="description" name="description" placeholder="Enter your message here..." style="height: 6rem; width:70%"></textarea>
-                                            <label for="desc">Comments</label>
-                                        </div>
-                                        
+
+                                        {% csrf_token %}
+                                        {{commentForm.as_tables}}
+                                        <textarea class="form-control" id="description" name="description" placeholder="Enter your message here..." style="height: 6rem; width:70%"></textarea>
                                     </form>
-                                    <button id="add-comment" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl" style="margin-left: 3rem;margin-bottom: 1.5rem;">Add</button>
+                                    <button id="add-comment" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl" style="margin-left: 3rem;margin-top: 1.5rem;margin-bottom: 1.5rem;">Add</button>
                                 
                                     
                             </section>
