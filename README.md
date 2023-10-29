@@ -53,7 +53,7 @@
       * Menulis notes mengenai buku
    
    7. Forum Page
-      * Display message dari berbagai user dalam satu page
+      * Diskusi buku oleh member 
    
    8. Review Page
       * Dapat diakses dari card buku yang sudah dikembalikan
