@@ -4,6 +4,9 @@
    3. Raisa Diandra Survijanto   - 2206814545
    4. Rafi Ghani Harditama       - 2206081364
 
+## Link App
+   Link: http://literatour-e13-tk.pbp.cs.ui.ac.id
+
 ## Manfaat App
     LITERATOUR adalah suatu aplikasi yang digunakan sebagai perpustakaan daring. Dengan melakukan pendaftaran, pengguna dapat menggunakan berbagai fitur yang ditawarkan oleh LITERATOUR.
 
