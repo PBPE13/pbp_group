@@ -30,7 +30,8 @@ def borrow_book(request, id):
         borrower = request.user
         return_date = request.POST.get("return_date")
 
-        borrow = Borrow(book=book, borrower=borrower, borrow_date=datetime.date.today , return_date=return_date, status=True)
+        borrow = Borrow(book=book, borrower=borrower, borrow_date=datetime.date.today , return_date=return_date)
+        book.status = False
         borrow.save()
 
         return HttpResponse(b"CREATED", status= 201)
@@ -42,6 +43,7 @@ def return_book(request, id):
     borrowed = Borrow.objects.filter(book=book)
     if request.method == 'POST':
         borrowed.delete()
+        book.status = True
         return HttpResponseRedirect(reverse('book_list:show_borrow'))
     
     return HttpResponseNotFound()
