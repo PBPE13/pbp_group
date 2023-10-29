@@ -25,9 +25,12 @@
         <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display">
         <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+        <title>Literatour | Forum </title>
         <style>
             h1, h2 {
                 font-family: "Mulish";
+                color: black;
+                font-size: 2rem !important;
                 
             }
             p {
@@ -78,9 +81,8 @@
         
         const card = (data) =>
             `<div id="comment-${data.pk}">
-                <div class="card border-1 bg-light" style="margin:10px 50px 10px 50px">
+                <div class="card border-1 bg-light" style="margin:10px 50px 10px 50px;">
                     <div class="card-body p-25 style="margin:20px 20px">
-        
                     </div>
                     <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                         <div class="d-flex align-items-end justify-content-between">
@@ -103,19 +105,20 @@
 
             const cardUser = (data) =>
             `<div id="comment-${data.pk}">
-                <div class="card border-1 bg-light" style="margin:10px 50px 10px 50px">
+                <div class="card border-1 bg-light" style="margin:10px 50px 10px 50px;">
                     <div class="card-body p-25 style="margin:20px 20px">
                     </div>
                     <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                         <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center" style="display:inline-block">
+                            <div class="d-flex align-items-center">
                                 <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." style="width:60px; height:60px">
                                 <div class="small">
-                                    <div style="float: left;">
+                                    <div style="float: left">
                                         <div class="fw-bold">${data.user} </div>
                                         <div class="text-muted">${data.date}</div>
                                     </div>
 
+                                
                                 </div>
                             </div>
                             <button type="button" class="btn btn-link" id="delete-icon" onclick="deleteCard(${data.pk})" style="float:right; margin: 0px 0px 0px 100px;text-align: right"><i class="bi bi-trash" style="color:black"></i></button>
@@ -146,38 +149,10 @@
 
     </head>
 
+    
+  
     <body style= "background-color: white;" >
-        <nav class="navbar bg-primary border-bottom border-body navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand">Literatour</a>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Pinjam Buku</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Reading List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/forum/">Forum</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'main:logout' %}">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
+ 
         <main class="flex-shrink-0">
             <!-- Page Content-->
             <section class="py-5">
@@ -196,17 +171,16 @@
                             <article>
                                 <!-- Post header-->
                                 <div class="card border-1 bg-light" style="margin: 10px 35px 10px 35px">
-                                    <header class="p-5">
+                                    <header class="p-5" style="padding-top: 1.5rem !important; padding-bottom: rem !important;">
                                         <h1 class="fw-bolder mb-1">{{forumPost.topic}}</h1>
-                                        <br>
-                                        <h1 class="mb-1">{{forumPost.title}}</h1>
+                                        <div><h1 class="mb-0" style="margin-top: 5px;">{{forumPost.title}}</h1></div>
                                         <div class="text-muted fst-italic mb-2">{{forumPost.date}}</div>
                                     </header>
                                     
-                                    <section class="mb-3">
-                                        <p class="fs-5 " style="margin: 10px 35px 10px 35px">{{forumPost.description}}</p>
+                                    <section class="mb-3" style="padding-left: 3rem; padding-right: 3rem">
+                                        <p class="fs-5 ">{{forumPost.description}}</p>
                                     </section>
-                                    <div class="d-flex align-items-center" style="margin: 0px 35px 35px 35px" >
+                                    <div class="d-flex align-items-center" style="margin: 0px 35px 35px 50px" >
                                         <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="...">
                                         <div class="small">
                                             <div class="fw-bold">{{forumPost.user}}</div>
@@ -229,7 +203,7 @@
                                             </div>
                                             
                                         </form>
-                                        <button type="button" class="btn btn-primary" id="add-comment" style="margin:10px 40px;">Add</button>
+                                        <button id="add-comment" class="py-2 px-2 font-medium bg-blue-500 text-white rounded-xl" style="margin-left: 3rem;margin-bottom: 1.5rem;">Add</button>
                                     {% else %}
                                         <div class="d-flex mb-4">
                                             <!-- Parent comment-->
@@ -244,7 +218,7 @@
                     </div>
                 
                 </div>
-                <div class="grid gap-4 grid-cols-1 sm:grid-flow-cols-1 md:grid-cols-3 lg:grid-cols-4 m-4" id="todo" style="justify-content: center; align-items: center; padding:0px 40px">
+                <div class="grid gap-4 sm:grid-flow-cols-1 " id="todo" style="justify-content: center; align-items: center; padding:0px 40px; margin: 10px 35px 10px 35px">
                 </div>
             </section>
         </main>

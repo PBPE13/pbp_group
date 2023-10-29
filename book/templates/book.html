@@ -4,8 +4,11 @@
 
 {% block content %}
 
-<div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 row-cols-xs-1 g-4">
+<br />
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 </div>
+
 
 <script>
     async function getBooks() {
@@ -13,27 +16,27 @@
     }
 
     async function refreshBooks(filter = "") {
-        document.querySelector(".row").innerHTML = "";
+        document.querySelector(".grid").innerHTML = "";
         const books = await getBooks();
         
         books.forEach((item, index) => {
             if (item.fields.title.toLowerCase().includes(filter.toLowerCase())) {
                 const bookCard = `
                     <div class="col">
-                        <div class="card mb-4">
-                            <img src="https://images.saymedia-content.com/.image/t_share/MTc0MjYyNTc5Mjg2MjU1MTAw/10-books-over-1000-pages-to-read.jpg" class="card-img-top" alt="${item.fields.title}">
-                            <div class="card-body">
-                                <h4 class="card-title">${item.fields.title}</h3>
-                                <p class="card-text">${item.fields.authors}</p>
+                        <div class="max-w-sm rounded overflow-hidden shadow-lg mb-4">
+                            <img src="https://images.saymedia-content.com/.image/t_share/MTc0MjYyNTc5Mjg2MjU1MTAw/10-books-over-1000-pages-to-read.jpg" class="w-full" alt="${item.fields.title}">
+                            <div class="px-6 py-4">
+                                <h4 class="font-bold text-xl mb-2">${item.fields.title}</h4>
+                                <p class="text-gray-700 text-base">${item.fields.authors}</p>
                             </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Rating: ${item.fields.average_rating}</li>
-                             </ul>
-                             <button type="button" class="btn btn-sm btn-primary">Borrow</button>
+                            <ul class="list-none bg-white rounded-b-lg">
+                                <li class="text-gray-700 text-base px-6 py-4">Rating: ${item.fields.average_rating}</li>
+                            </ul>
+                            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Borrow</button>
                         </div>
                     </div>`;
                 
-                const row = document.querySelector(".row");
+                const row = document.querySelector(".grid");
                 row.innerHTML += bookCard;
             }
         });

@@ -1,20 +1,15 @@
-from django.shortcuts import render
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from main.models import Profile
 from main.forms import RegisterForm, LoginForm
 from django.urls import reverse
-from django.http import HttpResponse
-from django.http import HttpResponseNotFound
-from django.http import JsonResponse
-from django.core import serializers
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import datetime
+
 
 def show_main(request):
     return render(request, "main.html")

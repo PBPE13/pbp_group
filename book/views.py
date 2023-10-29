@@ -14,7 +14,7 @@ def show_books(request):
     form = BookForm(request.POST or None)
     book = Book.objects.all()
     if request.user.is_authenticated:
-        profile = Profile.objects.filter(user=request.user)
+        profile = Profile.objects.filter(user=request.user).first()
         context = {
             'book' : book,
             'profile' : profile,
