@@ -7,6 +7,42 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 </div>
 
+<div class="modal fade" id="borrowModal" tabindex="-1" aria-labelledby="borrowModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="borrowModalLabel"><b>Borrow Book</b></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="borrower" class="col-form-label">Borrower:</label>
+                        <label for="borrower" class="col-form-label">{{borrower}}</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Title" class="col-form-label">Title:</label>
+                        <label for="Title" class="col-form-label" id="bookTitle"></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="borrow_date" class="col-form-label">Borrow Date:</label>
+                        <label for="borrow_date" class="col-form-label">{{date}}</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="return_date" class="col-form-label">Return Date:</label>
+                        <input type="date" class="form-control" id="return_date" name="return_date"></input>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-4" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4" id="borrow" data-bs-dismiss="modal">Borrow</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     async function getBooks() {
         return fetch("{% url 'book:get_books' %}").then((res) => res.json())
@@ -29,7 +65,9 @@
                             <ul class="list-none bg-white rounded-b-lg">
                                 <li class="text-gray-700 text-base px-6 py-4">Rating: ${item.fields.average_rating}</li>
                             </ul>
-                            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Borrow</button>
+                            <a onclick= "openBorrowModal( ${item.pk}, ${item.bookId}, ${item}, '${item.fields.title}')">
+                                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Borrow</button>
+                            </a>
                         </div>
                     </div>`;
                 
@@ -61,15 +99,36 @@
 
     refreshBooks();
 
-    async function borrowBook(id){
-        const formData = new FormData(this)
-        formData.append("id", id)
-        fetch("{% url 'borrow_book:borrow_book' %}", {
+    function openBorrowModal(borrowId, bookId, book, title){
+        document.getElementById('borrowId').value = borrowId;
+        document.getElementById('bookId').value = bookId;
+        document.getElementById('book').value = book;
+        document.getElementById('title').value = title;
+
+        const borrowModal = new bootstrap.Modal(document.getElementById('borrowModal'));
+        borrowModal.show();
+    }
+
+    async function borrowBook(){
+        const borrowId = document.getElementById('borrowId').value
+        const bookId = document.getElementById('bookId').value;
+        const book = document.getElementById('book').value;
+        const title = document.getElementById('title').value
+
+        const formData = new FormData()
+        formData.append("id", borrowId)
+        fetch(`{% url 'borrow_book:borrow_book' %}`, {
             method: "POST",
             body: formData
-        }).then(refreshBooks)
+        }).then(refreshBooks);
         return false
     }
+
+    document.getElementById("#borrow").addEventListener("click", function(event){
+        event.preventDefault();
+        borrowBook();
+    });
+
 </script>
 
 

@@ -11,7 +11,8 @@ def show_borrow(request):
     user = request.user
     borrows = Borrow.objects.filter(borrower=request.user)
     context = {
-        'books' : borrows,
+        'borrower': user,
+        'borrows' : borrows,
         'date' : datetime.date.today,
         'jumlah_dipinjam' : borrows.count(),
     }
