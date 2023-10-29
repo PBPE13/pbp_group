@@ -72,7 +72,6 @@
 
 ## Role
    1. Admin
-      * Melakukan add buku untuk buku yang direquest oleh member pada forum
       * Melakukan pengecekkan data peminjaman buku tiap member
       * Memonitor aktivitas tiap user (access logs)
    
