@@ -61,3 +61,30 @@ def logout_user(request):
 def profile_user(request):
     profile = get_object_or_404(Profile, user=request.user)
     return render(request, 'profile.html', {'profile': profile})
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=request.user)
+        
+        role = request.POST.get('role')
+        name = request.POST.get('name')
+        bio_data = request.POST.get('bio_data')
+        preferred_genre = request.POST.get('preferred_genre')
+        
+        if not name:
+            messages.error(request, 'Name is required.')
+            return redirect('main:update_profile')
+
+        profile.role = role
+        profile.name = name
+        profile.bio_data = bio_data
+        profile.preferred_genre = preferred_genre
+        profile.save()
+        
+        messages.success(request, 'Your profile was successfully updated!')
+        return redirect('main:profile_user')
+    else:
+        messages.error(request, 'Invalid request')
+        return redirect('main:profile_user')
+

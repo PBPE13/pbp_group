@@ -5,29 +5,33 @@
     <div class="container mx-auto mt-10">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
             <div class="bg-gradient-to-r from-blue-500 to-blue-700 p-4 text-white text-lg font-bold">
-                {{ profile.user.username }}'s Profile
+                Edit {{ profile.user.username }}'s Profile
             </div>
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <span class="w-1/3 text-gray-700 font-semibold">Role:</span>
-                    <p class="w-2/3 text-gray-800">{{ profile.role }}</p>
+            <form method="post" action="{% url 'main:update_profile' %}">
+                {% csrf_token %}
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <label for="role" class="w-1/3 text-gray-700 font-semibold">Role:</label>
+                        <input type="text" id="role" name="role" class="w-2/3 text-gray-800" value="{{ profile.role }}">
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <label for="name" class="w-1/3 text-gray-700 font-semibold">Name:</label>
+                        <input type="text" id="name" name="name" class="w-2/3 text-gray-800" value="{{ profile.name }}">
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <label for="bio_data" class="w-1/3 text-gray-700 font-semibold">Bio:</label>
+                        <textarea id="bio_data" name="bio_data" class="w-2/3 text-gray-800 whitespace-pre-line">{{ profile.bio_data }}</textarea>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <label for="preferred_genre" class="w-1/3 text-gray-700 font-semibold">Preferred Genre:</label>
+                        <input type="text" id="preferred_genre" name="preferred_genre" class="w-2/3 text-gray-800" value="{{ profile.preferred_genre }}">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save Changes</button>
+                    </div>
                 </div>
-                <div class="flex items-center mb-4">
-                    <span class="w-1/3 text-gray-700 font-semibold">Name:</span>
-                    <p class="w-2/3 text-gray-800">{{ profile.name }}</p>
-                </div>
-                <div class="flex items-center mb-4">
-                    <span class="w-1/3 text-gray-700 font-semibold">Bio:</span>
-                    <p class="w-2/3 text-gray-800 whitespace-pre-line">{{ profile.bio_data }}</p>
-                </div>
-                <div class="flex items-center mb-4">
-                    <span class="w-1/3 text-gray-700 font-semibold">Preferred Genre:</span>
-                    <p class="w-2/3 text-gray-800">{{ profile.preferred_genre }}</p>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
-    
-    
 </div>
 {% endblock %}
