@@ -1,5 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Date : {{date}}
+
+<div class="text-center">
+    <div class = "mt-1" style="margin-top: 40px; margin-bottom: 40px;">
+        <h1 style="margin-top: 20px; margin-bottom: 20px; font-size: 27px;"><b>Borrow & Return Books</b></h1>
+        <p style="margin-top: 20px; margin-bottom: 20px;">Tanggal Hari ini: {{date}}</p>
+    </div>
+    <div class = "mt-2" style="margin-top: 40px; margin-bottom: 40px;">
+        <h3 style="margin-top: 20px; margin-bottom: 20px;"><b>Borrowed Books</b></h3>
+        <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 row-cols-xs-1 g-4"></div>
+    </div>
+    <div class = "mt-3" style="margin-top: 40px; margin-bottom: 40px;">
+        <h3 style="margin-top: 20px; margin-bottom: 20px;"><b>Book List</b></h3>
+        {% include 'book_list.html' %}
+    </div>
+</div>
+
+
+<script>
+    async function getBooks() {
+        return fetch("{% url 'book:get_books' %}").then((res) => res.json())
+    }
+
+    async function getBorrow() {
+        return fetch("{% url 'borrow_book:get_borrow' %}").then((res) => res.json())
+    }
+
+    async function refreshBorrow(filter = ""){
+        document.querySelector(".row").innerHTML = "";
+        const borrows = await getBorrow();
+        borrows.forEach((borrow, index) => {
+            if (borrow.fields.book.title.toLowerCase().includes(filter.toLowerCase())) {
+                const bookCard = `
+                    <div class="col">
+                        <div class="card mb-4">
+                            <img src="https://images.saymedia-content.com/.image/t_share/MTc0MjYyNTc5Mjg2MjU1MTAw/10-books-over-1000-pages-to-read.jpg" class="card-img-top" alt="${borrow.fields.book.title}">
+                            <div class="card-body">
+                                <h4 class="card-title">${borrow.fields.book.title}</h3>
+                                <p class="card-text">${borrow.fields.book.authors}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Tanggal Peminjaman: ${item.fields.borrow_date}</li>
+                                <li class="list-group-item">Tanggal Pengembalian: ${item.fields.return_date}</li>
+                            </ul>
+                            <button type="button" class="btn btn-sm btn-primary">Return</button>
+                        </div>
+                    </div>`;
+                const row = document.querySelector(".row");
+                row.innerHTML += bookCard;
+            }
+        });
+    }
+
+    async function borrowBook(id){
+        const formData = new FormData(this)
+        formData.append("id", id)
+        fetch("{% url 'borrow_book:borrow_book' %}", {
+            method: "POST",
+            body: formData
+        }).then(refreshBooks)
+        return false
+    }
+</script>
 {% endblock content %}
