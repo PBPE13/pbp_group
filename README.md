@@ -53,7 +53,7 @@
       * Menulis notes mengenai buku
    
    7. Forum Page
-      * Display message dari berbagai user dalam satu page
+      * Diskusi buku oleh member 
    
    8. Review Page
       * Dapat diakses dari card buku yang sudah dikembalikan
@@ -72,7 +72,6 @@
 
 ## Role
    1. Admin
-      * Melakukan add buku untuk buku yang direquest oleh member pada forum
       * Melakukan pengecekkan data peminjaman buku tiap member
       * Memonitor aktivitas tiap user (access logs)
    
