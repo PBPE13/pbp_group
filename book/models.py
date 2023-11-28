@@ -14,4 +14,4 @@ class Book(models.Model):
     text_review_count = models.IntegerField(null= True, blank= True)
     publication_date= models.TextField(null= True, blank= True)
     publisher = models.TextField(null= True, blank= True)
-    status = models.BooleanField(default=True)
+    status = models.BooleanField(null= True ,default=True)
