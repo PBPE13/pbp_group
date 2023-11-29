@@ -15,7 +15,7 @@
       "text_review_count": 27591,
       "publication_date": "9/16/2006",
       "publisher": "Scholastic Inc.",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -34,7 +34,7 @@
       "text_review_count": 29221,
       "publication_date": "9/1/2004",
       "publisher": "Scholastic Inc.",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -53,7 +53,7 @@
       "text_review_count": 244,
       "publication_date": "11/1/2003",
       "publisher": "Scholastic",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -72,7 +72,7 @@
       "text_review_count": 36325,
       "publication_date": "5/1/2004",
       "publisher": "Scholastic Inc.",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -91,7 +91,7 @@
       "text_review_count": 164,
       "publication_date": "9/13/2004",
       "publisher": "Scholastic",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -110,7 +110,7 @@
       "text_review_count": 1,
       "publication_date": "4/26/2005",
       "publisher": "Nimble Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -129,7 +129,7 @@
       "text_review_count": 808,
       "publication_date": "9/12/2005",
       "publisher": "Scholastic",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -148,7 +148,7 @@
       "text_review_count": 254,
       "publication_date": "11/1/2005",
       "publisher": "Gramercy Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -167,7 +167,7 @@
       "text_review_count": 4080,
       "publication_date": "4/30/2002",
       "publisher": "Del Rey Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -186,7 +186,7 @@
       "text_review_count": 460,
       "publication_date": "8/3/2004",
       "publisher": "Crown",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -205,7 +205,7 @@
       "text_review_count": 253,
       "publication_date": "3/23/2005",
       "publisher": "Random House Audio",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -224,7 +224,7 @@
       "text_review_count": 195,
       "publication_date": "1/17/1996",
       "publisher": "Wings Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -243,7 +243,7 @@
       "text_review_count": 9396,
       "publication_date": "9/14/2004",
       "publisher": "Broadway Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -262,7 +262,7 @@
       "text_review_count": 499,
       "publication_date": "12/3/2002",
       "publisher": "Broadway Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -281,7 +281,7 @@
       "text_review_count": 131,
       "publication_date": "9/14/2004",
       "publisher": "Broadway Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -300,7 +300,7 @@
       "text_review_count": 4245,
       "publication_date": "5/15/2001",
       "publisher": "Broadway Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -319,7 +319,7 @@
       "text_review_count": 2211,
       "publication_date": "6/28/2000",
       "publisher": "Broadway Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -338,7 +338,7 @@
       "text_review_count": 2257,
       "publication_date": "8/28/1990",
       "publisher": "William Morrow Paperbacks",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -357,7 +357,7 @@
       "text_review_count": 2238,
       "publication_date": "3/28/1993",
       "publisher": "William Morrow Paperbacks",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -376,7 +376,7 @@
       "text_review_count": 3301,
       "publication_date": "5/28/1997",
       "publisher": "William Morrow Paperbacks",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -395,7 +395,7 @@
       "text_review_count": 2085,
       "publication_date": "9/28/1991",
       "publisher": "William Morrow Paperbacks",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -414,7 +414,7 @@
       "text_review_count": 1550,
       "publication_date": "9/25/2012",
       "publisher": "Ballantine Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -433,7 +433,7 @@
       "text_review_count": 91,
       "publication_date": "10/21/2004",
       "publisher": "Houghton Mifflin Harcourt",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -452,7 +452,7 @@
       "text_review_count": 13670,
       "publication_date": "9/5/2003",
       "publisher": "Houghton Mifflin Harcourt",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -471,7 +471,7 @@
       "text_review_count": 140,
       "publication_date": "10/1/2002",
       "publisher": "Houghton Mifflin Harcourt",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -490,7 +490,7 @@
       "text_review_count": 46,
       "publication_date": "11/5/2003",
       "publisher": "Houghton Mifflin Harcourt",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -509,7 +509,7 @@
       "text_review_count": 6,
       "publication_date": "11/15/2004",
       "publisher": "Houghton Mifflin Harcourt",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -528,7 +528,7 @@
       "text_review_count": 59,
       "publication_date": "7/28/2005",
       "publisher": "Pragmatic Bookshelf",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -547,7 +547,7 @@
       "text_review_count": 12017,
       "publication_date": "4/1/2000",
       "publisher": "Atheneum Books for Young Readers: Richard Jackson Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -566,7 +566,7 @@
       "text_review_count": 2,
       "publication_date": "8/28/1994",
       "publisher": "Teacher Created Resources",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -585,7 +585,7 @@
       "text_review_count": 334,
       "publication_date": "1/23/2001",
       "publisher": "Delacorte Press",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -604,7 +604,7 @@
       "text_review_count": 0,
       "publication_date": "6/10/2003",
       "publisher": "Cherry Lane Music Company",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -623,7 +623,7 @@
       "text_review_count": 16,
       "publication_date": "11/1/2005",
       "publisher": "The New Press",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -642,7 +642,7 @@
       "text_review_count": 4,
       "publication_date": "11/1/2005",
       "publisher": "Changeling Press",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -661,7 +661,7 @@
       "text_review_count": 111,
       "publication_date": "8/17/2006",
       "publisher": "Viking Juvenile",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -680,7 +680,7 @@
       "text_review_count": 302,
       "publication_date": "4/14/2003",
       "publisher": "Firebird",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -699,7 +699,7 @@
       "text_review_count": 96,
       "publication_date": "6/8/2004",
       "publisher": "iUniverse",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -718,7 +718,7 @@
       "text_review_count": 43,
       "publication_date": "4/12/2005",
       "publisher": "Shambhala",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -737,7 +737,7 @@
       "text_review_count": 12,
       "publication_date": "8/28/1990",
       "publisher": "Ivy Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -756,7 +756,7 @@
       "text_review_count": 2626,
       "publication_date": "8/29/2006",
       "publisher": "Amistad",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -775,7 +775,7 @@
       "text_review_count": 12,
       "publication_date": "6/15/2004",
       "publisher": "HarperAudio",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -794,7 +794,7 @@
       "text_review_count": 3,
       "publication_date": "6/15/2004",
       "publisher": "Harper",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -813,7 +813,7 @@
       "text_review_count": 82,
       "publication_date": "5/15/2006",
       "publisher": "FT Press",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -832,7 +832,7 @@
       "text_review_count": 4,
       "publication_date": "12/14/2005",
       "publisher": "Archaia",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -851,7 +851,7 @@
       "text_review_count": 37,
       "publication_date": "6/1/1982",
       "publisher": "Farrar  Straus and Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -870,7 +870,7 @@
       "text_review_count": 203,
       "publication_date": "5/16/2006",
       "publisher": "Farrar Straus Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -889,7 +889,7 @@
       "text_review_count": 22,
       "publication_date": "4/1/1986",
       "publisher": "Farrar  Straus and Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -908,7 +908,7 @@
       "text_review_count": 305,
       "publication_date": "9/1/1990",
       "publisher": "Farrar  Straus and Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -927,7 +927,7 @@
       "text_review_count": 228,
       "publication_date": "1/6/1999",
       "publisher": "Farrar  Straus and Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -946,7 +946,7 @@
       "text_review_count": 261,
       "publication_date": "4/1/1991",
       "publisher": "Farrar  Straus and Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -965,7 +965,7 @@
       "text_review_count": 52,
       "publication_date": "4/1/1994",
       "publisher": "Farrar  Straus and Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -984,7 +984,7 @@
       "text_review_count": 36,
       "publication_date": "4/1/1994",
       "publisher": "Farrar  Straus and Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1003,7 +1003,7 @@
       "text_review_count": 98,
       "publication_date": "11/1/1987",
       "publisher": "Farrar  Straus and Giroux",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1022,7 +1022,7 @@
       "text_review_count": 70,
       "publication_date": "3/1/2002",
       "publisher": "Dramatists Play Service",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1041,7 +1041,7 @@
       "text_review_count": 64,
       "publication_date": "7/2/1991",
       "publisher": "Vintage",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1060,7 +1060,7 @@
       "text_review_count": 1,
       "publication_date": "3/29/2006",
       "publisher": "Routledge",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1079,7 +1079,7 @@
       "text_review_count": 4,
       "publication_date": "3/14/2006",
       "publisher": "North Light Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1098,7 +1098,7 @@
       "text_review_count": 53,
       "publication_date": "9/1/2003",
       "publisher": "Chosen Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1117,7 +1117,7 @@
       "text_review_count": 2,
       "publication_date": "1/28/1997",
       "publisher": "Association for Supervision & Curriculum Development",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1136,7 +1136,7 @@
       "text_review_count": 2257,
       "publication_date": "11/15/2002",
       "publisher": "Kingfisher",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1155,7 +1155,7 @@
       "text_review_count": 5,
       "publication_date": "11/15/2004",
       "publisher": "ASCD",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1174,7 +1174,7 @@
       "text_review_count": 6,
       "publication_date": "4/28/2003",
       "publisher": "Sovereign World",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1193,7 +1193,7 @@
       "text_review_count": 659,
       "publication_date": "10/16/2003",
       "publisher": "Workman Publishing Company",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1212,7 +1212,7 @@
       "text_review_count": 8,
       "publication_date": "5/10/2004",
       "publisher": "One Hour Entertainment",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1231,7 +1231,7 @@
       "text_review_count": 4,
       "publication_date": "8/19/2004",
       "publisher": "North Light Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1250,7 +1250,7 @@
       "text_review_count": 166,
       "publication_date": "6/15/1987",
       "publisher": "Ace Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1269,7 +1269,7 @@
       "text_review_count": 568,
       "publication_date": "7/1/1987",
       "publisher": "Ace Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1288,7 +1288,7 @@
       "text_review_count": 2359,
       "publication_date": "7/15/1987",
       "publisher": "Ace Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1307,7 +1307,7 @@
       "text_review_count": 21,
       "publication_date": "7/1/2004",
       "publisher": "Tor Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1326,7 +1326,7 @@
       "text_review_count": 20,
       "publication_date": "4/16/1984",
       "publisher": "Putnam",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1345,7 +1345,7 @@
       "text_review_count": 83,
       "publication_date": "8/29/2006",
       "publisher": "Tor Science Fiction",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1364,7 +1364,7 @@
       "text_review_count": 644,
       "publication_date": "8/15/1987",
       "publisher": "Ace Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1383,7 +1383,7 @@
       "text_review_count": 102,
       "publication_date": "6/12/2002",
       "publisher": "Houghton Mifflin Harcourt",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1402,7 +1402,7 @@
       "text_review_count": 4551,
       "publication_date": "9/29/1996",
       "publisher": "Ballantine Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1421,7 +1421,7 @@
       "text_review_count": 13,
       "publication_date": "9/13/2005",
       "publisher": "Delacorte Books for Young Readers",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1440,7 +1440,7 @@
       "text_review_count": 1,
       "publication_date": "11/1/2004",
       "publisher": "Thomas Nelson",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1459,7 +1459,7 @@
       "text_review_count": 16,
       "publication_date": "5/19/2006",
       "publisher": "Wiley",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1478,7 +1478,7 @@
       "text_review_count": 0,
       "publication_date": "2/7/2000",
       "publisher": "Heinemann Drama",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1497,7 +1497,7 @@
       "text_review_count": 9,
       "publication_date": "5/3/2005",
       "publisher": "William Morrow Paperbacks",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1516,7 +1516,7 @@
       "text_review_count": 9,
       "publication_date": "10/30/2006",
       "publisher": "Wiley",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1535,7 +1535,7 @@
       "text_review_count": 0,
       "publication_date": "1/24/2006",
       "publisher": "McGraw-Hill",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1554,7 +1554,7 @@
       "text_review_count": 4,
       "publication_date": "9/17/2004",
       "publisher": "Wiley",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1573,7 +1573,7 @@
       "text_review_count": 0,
       "publication_date": "6/6/2006",
       "publisher": "Wiley",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1592,7 +1592,7 @@
       "text_review_count": 1,
       "publication_date": "5/31/2004",
       "publisher": "Wiley",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1611,7 +1611,7 @@
       "text_review_count": 3,
       "publication_date": "4/25/2005",
       "publisher": "Wiley",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1630,7 +1630,7 @@
       "text_review_count": 4,
       "publication_date": "7/29/2006",
       "publisher": "O'Reilly Media",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1649,7 +1649,7 @@
       "text_review_count": 5,
       "publication_date": "5/3/2005",
       "publisher": "Citadel",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1668,7 +1668,7 @@
       "text_review_count": 2,
       "publication_date": "5/3/2005",
       "publisher": "Citadel",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1687,7 +1687,7 @@
       "text_review_count": 1,
       "publication_date": "1/1/2007",
       "publisher": "O'Reilly Media",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1706,7 +1706,7 @@
       "text_review_count": 1851,
       "publication_date": "5/31/2004",
       "publisher": "Penguin Classics",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1725,7 +1725,7 @@
       "text_review_count": 5696,
       "publication_date": "11/5/2002",
       "publisher": "Signet",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1744,7 +1744,7 @@
       "text_review_count": 309,
       "publication_date": "1/30/2003",
       "publisher": "Penguin Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1763,7 +1763,7 @@
       "text_review_count": 3,
       "publication_date": "11/26/1965",
       "publisher": "Cliffs Notes",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1782,7 +1782,7 @@
       "text_review_count": 726,
       "publication_date": "7/1/2003",
       "publisher": "Barnes & Noble Classics",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1801,7 +1801,7 @@
       "text_review_count": 72,
       "publication_date": "11/23/2004",
       "publisher": "Dover Publications",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1820,7 +1820,7 @@
       "text_review_count": 48,
       "publication_date": "8/26/2004",
       "publisher": "Barnes & Noble",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1839,7 +1839,7 @@
       "text_review_count": 65,
       "publication_date": "1/28/2006",
       "publisher": "Mira Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1858,7 +1858,7 @@
       "text_review_count": 33,
       "publication_date": "11/26/1987",
       "publisher": "Cambridge University Press",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1877,7 +1877,7 @@
       "text_review_count": 279,
       "publication_date": "7/3/1990",
       "publisher": "Penguin Books",
-      "status": "True"
+      "status": true
     }
   },
   {
@@ -1896,7 +1896,7 @@
       "text_review_count": 216,
       "publication_date": "6/30/1998",
       "publisher": "Vintage",
-      "status": "True"
+      "status": true
     }
   }
 ]
