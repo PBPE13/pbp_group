@@ -8,7 +8,7 @@ on:
 
 jobs:
   Deployment:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
     - name: Cloning repo
@@ -19,6 +19,6 @@ jobs:
     - name: Push to Dokku server
       uses: dokku/github-action@master
       with:
-        branch: 'master'
+        branch: 'main'
         git_remote_url: ssh://dokku@${{ secrets.DOKKU_SERVER_IP }}/${{ secrets.DOKKU_APP_NAME }}
         ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
