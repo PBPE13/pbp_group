@@ -7,7 +7,7 @@ class Book(models.Model):
     authors= models.TextField(null= True, blank= True) 
     average_rating= models.FloatField(null= True, blank= True) 
     isbn = models.TextField(null= True, blank= True)
-    isbn13 = models.IntegerField(null= True, blank= True)
+    isbn13 = models.BigIntegerField(null= True, blank= True)
     language_code= models.TextField(null= True, blank= True)
     num_pages = models.IntegerField(null= True, blank= True)
     ratings_count= models.IntegerField(null= True, blank= True)
