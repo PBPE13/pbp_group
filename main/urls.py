@@ -1,6 +1,6 @@
 from django.urls import path
 from main.views import show_main
-from main.views import register, login_user, logout_user, show_home, profile_user, update_profile
+from main.views import register, login_user, logout_user, show_home, profile_user, update_profile, show_json
 
 app_name = 'main'
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('home/', show_home, name='home'),
     path('profile/', profile_user, name='profile_user'),
     path('profile/update/', update_profile, name='update_profile'),
+    path('json/', show_json, name="show_json"),
 ]

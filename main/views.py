@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
+from book.models import Book
 from main.models import Profile
 from main.forms import RegisterForm, LoginForm
 from django.urls import reverse
@@ -8,7 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import datetime
-
+from django.core import serializers
 
 def show_main(request):
     return render(request, "main.html")
@@ -88,3 +89,7 @@ def update_profile(request):
         messages.error(request, 'Invalid request')
         return redirect('main:profile_user')
 
+
+def show_json(request):
+    data = Book.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
