@@ -25,5 +25,5 @@ urlpatterns = [
     path('diary/', include('diary.urls')),
     path('review/', include('book_review.urls')),
     path('borrow/', include('borrow_book.urls')),
-    path('login/', login, name='login')
+    path('auth/', include('authentication.urls')),
 ]

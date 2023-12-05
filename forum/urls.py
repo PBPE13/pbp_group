@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 from forum.views import  get_comment_list, create_comment_ajax, create_post_ajax, delete_forum, get_forum_list
-from forum.views import create_comment_ajax, get_comment_list, delete_comment,flutter_comment,flutter_forum
+from forum.views import create_comment_ajax, get_comment_list, delete_comment,flutter_comment,flutter_forum, flutter_add_comment, flutter_add_forum
 app_name = 'forum'
 
 urlpatterns = [
@@ -15,4 +15,6 @@ urlpatterns = [
     path('deleteComment/<int:id>/', delete_comment, name="deleteComment"),
     path('flutterForum/', flutter_forum, name="flutter_forum"),
     path('flutterComment/<int:id>/', flutter_comment, name="flutter_comment"),
+      path('flutter/addComment/<int:id>/', flutter_add_comment, name="flutterAddComment"),
+    path('flutter/addForum/', flutter_add_forum, name="flutterAddForum")
 ]
