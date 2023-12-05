@@ -198,7 +198,7 @@ def flutter_add_forum(request):
         ForumPost.objects.create(
             topic=topic,
             description=description,
-            date_created=datetime.date.today(),
+            date=datetime.date.today(),
             user=request.user,
             title=title
         )
@@ -211,15 +211,13 @@ def flutter_add_comment(request, id):
     if request.method == 'POST':
         try:
             forumPost = ForumPost.objects.get(pk=id)
-            role = request.POST['role']
             description = request.POST['description']
 
             Comment.objects.create(
                 parentForum=forumPost,
                 description=description,
-                date_created=datetime.date.today(),
-                author=request.user,
-                role=role
+                date=datetime.date.today(),
+                user=request.user,
             )
             return JsonResponse({'status': 'success'})
         except:
