@@ -10,7 +10,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.core import serializers
-
+from django.views.decorators.csrf import csrf_exempt
 def show_main(request):
     return render(request, "main.html")
 
@@ -35,7 +35,7 @@ def register(request):
             return redirect('main:login')
     context = {'form':form}
     return render(request, 'register.html', context)
-
+@csrf_exempt
 def login_user(request):
     form = LoginForm()
     if request.method == 'POST':
@@ -51,7 +51,7 @@ def login_user(request):
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {'form':form}
     return render(request, 'login.html', context)
-
+@csrf_exempt
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:show_main'))
