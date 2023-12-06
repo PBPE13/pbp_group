@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 def show_main(request):
     return render(request, "main.html")
 
