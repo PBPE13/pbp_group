@@ -36,6 +36,7 @@ def register(request):
             return redirect('main:login')
     context = {'form':form}
     return render(request, 'register.html', context)
+
 @csrf_exempt
 def login_user(request):
     form = LoginForm()
@@ -52,6 +53,7 @@ def login_user(request):
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {'form':form}
     return render(request, 'login.html', context)
+
 @csrf_protect
 def logout_user(request):
     logout(request)
