@@ -16,7 +16,7 @@ def show_main(request):
 
 def show_home(request):
     return render(request, "home.html")
-
+@csrf_protect
 def register(request):
     form = RegisterForm()
 
@@ -35,7 +35,7 @@ def register(request):
             return redirect('main:login')
     context = {'form':form}
     return render(request, 'register.html', context)
-
+@csrf_protect
 def login_user(request):
     form = LoginForm()
     if request.method == 'POST':
@@ -51,7 +51,7 @@ def login_user(request):
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {'form':form}
     return render(request, 'login.html', context)
-
+@csrf_protect
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:show_main'))
