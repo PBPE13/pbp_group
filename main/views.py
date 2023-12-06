@@ -17,7 +17,7 @@ def show_main(request):
 
 def show_home(request):
     return render(request, "home.html")
-@csrf_exempt
+
 def register(request):
     form = RegisterForm()
 
@@ -37,7 +37,7 @@ def register(request):
     context = {'form':form}
     return render(request, 'register.html', context)
 
-@csrf_exempt
+
 def login_user(request):
     form = LoginForm()
     if request.method == 'POST':
