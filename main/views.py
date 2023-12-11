@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
+from book.models import Book
 from main.models import Profile
 from main.forms import RegisterForm, LoginForm
 from django.urls import reverse
@@ -8,14 +9,15 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import datetime
-
-
+from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 def show_main(request):
     return render(request, "main.html")
 
 def show_home(request):
     return render(request, "home.html")
-
+@csrf_exempt
 def register(request):
     form = RegisterForm()
 
@@ -35,6 +37,7 @@ def register(request):
     context = {'form':form}
     return render(request, 'register.html', context)
 
+@csrf_exempt
 def login_user(request):
     form = LoginForm()
     if request.method == 'POST':
@@ -51,6 +54,7 @@ def login_user(request):
     context = {'form':form}
     return render(request, 'login.html', context)
 
+@csrf_protect
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:show_main'))
@@ -88,3 +92,7 @@ def update_profile(request):
         messages.error(request, 'Invalid request')
         return redirect('main:profile_user')
 
+
+def show_json(request):
+    data = Book.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
