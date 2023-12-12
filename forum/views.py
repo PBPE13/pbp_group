@@ -32,52 +32,12 @@ def get_forum_list(request):
     data = json.dumps(ret, default=str)
     return HttpResponse(data, content_type='application/json')
 
-def get_forum_json(request):
-    forum_item = ForumPost.objects.all()
-    return HttpResponse(serializers.serialize('json', forum_item))
 
 def index(request):
     forumPost = ForumPost.objects.all().order_by('-date')
     books = Book.objects.all().order_by('title')
-    
     response = {'forumPost': forumPost , 'books':books}
     return render(request, 'forumPage.html', response)
-
-@csrf_exempt
-@login_required(login_url='/login')
-def add_forum_ajax(request):
-   if request.method == 'POST':
-      topic = request.POST.get("topic")
-      description = request.POST.get("description")
-      title = request.POST.get("title")
-      user = request.user
-      new_forum = ForumPost(topic=topic, description=description, title= title,user=user)
-      new_forum.save()
-
-      return HttpResponse(b"CREATED", status=201)
-   return HttpResponseNotFound()
-
-@login_required(login_url='/login')
-@csrf_exempt
-def create_comment_ajax(request, id):
-    forumPost = ForumPost.objects.get(pk=id)
-    if request.method == "POST":
-        description = request.POST.get("description")
-        role = request.POST.get('role')
-        new_comment = Comment.objects.create(
-            parentForum=forumPost,
-            description=description,
-            date=datetime.date.today(),
-            user=request.user,
-        )
-        result = {
-            'pk':new_comment.pk,
-            'user':new_comment.user.username,
-            'description':new_comment.description,
-            'date':new_comment.date.date(),
-        }
-        return JsonResponse(result, status=200)
-    return render(request, "forumPage.html")
 
 @csrf_exempt
 def get_comment_list(request, id):
@@ -102,23 +62,6 @@ def get_comment_json(request, id):
     forumPost = ForumPost.objects.get(pk=id)
     comments = Comment.objects.all().filter(parentForum=forumPost).order_by('-date')
     return HttpResponse(serializers.serialize('json', comments))
-
-@csrf_exempt
-@login_required(login_url='/login')
-def add_comment_ajax(request, id):
-   forumPost = ForumPost.objects.get(pk=id)
-   if request.method == 'POST':  
-      description = request.POST.get("description")
-      new_comment = Comment(
-            parentForum=forumPost,
-            description=description,
-            date=datetime.date.today(),
-            user=request.user,
-        )
-      new_comment.save()
-
-      return HttpResponse(b"CREATED", status=201)
-   return HttpResponseNotFound()
 
 def forum_post_detail(request,id):
     forumPost = ForumPost.objects.get(pk=id)
@@ -209,3 +152,72 @@ def delete_comment(request, id):
         comment.delete()
     return HttpResponse(status=202)
 
+@csrf_exempt
+def flutter_forum(request):
+    list_post = ForumPost.objects.all().order_by('-date')
+    ret = []
+    for posts in list_post:
+        temp = {
+            "pk": posts.pk,
+            "user": posts.user.username,
+            "topic": posts.topic,
+            "description":posts.description,
+            "date":posts.date.date(),
+            "title":posts.title
+        }
+        ret.append(temp)
+
+    data = json.dumps(ret, default=str)
+    return HttpResponse(data, content_type='application/json')
+
+@csrf_exempt
+def flutter_comment(request, id):
+    forumPost = ForumPost.objects.get(pk=id)
+    comments = Comment.objects.all().filter(parentForum=forumPost).order_by('-date')
+    ret = []
+    for comment in comments:
+        temp = {
+            "pk": comment.pk,
+            "user": comment.user,
+            "parentForum": comment.parentForum.pk,
+            "description": comment.description,
+            "date": comment.date.date(),
+        }
+        ret.append(temp)
+    data = json.dumps(ret, default=str)
+    return HttpResponse(data, content_type='application/json')
+    
+
+@login_required(login_url='/authentication/login')
+@csrf_exempt
+def flutter_add_forum(request):
+    if request.method == 'POST':
+        topic = request.POST['topic']
+        title = request.POST['title']
+        description = request.POST['description']
+        ForumPost.objects.create(
+            topic=topic,
+            description=description,
+            date=datetime.date.today(),
+            user=request.user,
+            title=title
+        )
+        print("success")
+        return JsonResponse({'status': 'success'})
+
+@login_required(login_url='/authentication/login')
+@csrf_exempt
+def flutter_add_comment(request, id):
+    if request.method == 'POST':
+        try:
+            forumPost = ForumPost.objects.get(pk=id)
+            description = request.POST['description']
+            Comment.objects.create(
+                parentForum=forumPost,
+                description=description,
+                date=datetime.date.today(),
+                user=request.user,
+            )
+            return JsonResponse({'status': 'success'})
+        except:
+            return JsonResponse({'status':'failed'})

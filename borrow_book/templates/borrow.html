@@ -190,7 +190,7 @@
     async function borrowBook(){
         const bookId = document.getElementById('bookId').value;
         const return_date = document.getElementById('return_date').value;
-
+        console.log("test");
         const formData = new FormData()
         formData.append("id", bookId)
         formData.append("return_date", return_date)
