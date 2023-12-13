@@ -10,27 +10,25 @@ from django.core import serializers
 from book.models import Book
 from book_review.models import Review
 from .forms import ReviewForm
+import json
 
 @csrf_exempt
-def review_list(request, book_id):
-    book = get_object_or_404(Book, pk=book_id)
-    reviews = Review.objects.filter(book=book)
-    return render(request, 'review_list.html', {'book': book, 'reviews': reviews, 'title': book.title, 'id': book.pk})
+def review_list(request):
+    return render(request, 'review_list.html')
 
 @csrf_exempt
-def add_review(request, book_id):
-    book = get_object_or_404(Book, pk=book_id)
+def add_review(request):
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.book = book
-            review.user = request.user
-            review.save()
-            return HttpResponse(b"CREATED", status=201)
-    else:
-        form = ReviewForm()
-    return HttpResponseNotFound()
+        book = request.POST.get("book")
+        rating = request.POST.get("rating")
+        content = request.POST.get("content")
+        user = request.user
+
+        new_review = Review(book = book, rating=rating, content=content, user=user)
+       
+        new_review.save()
+        return HttpResponse(b"CREATED", status=201)
+ 
 
 @csrf_exempt
 def edit_review(request, review_id):
@@ -56,5 +54,24 @@ def delete_review(request, review_id):
     return HttpResponseNotFound()
 
 def get_review_json(request):
-    review = Review.objects.filter(user=request.user)
+    review = Review.objects.all()
     return HttpResponse(serializers.serialize('json', review))
+
+def add_review_flutter(request):
+    if request.method == 'POST':
+        input = json.loads(request.body)
+        
+        book = input['book']
+        rating = input['rating']
+        content = input['content']
+        user = request.user
+        
+        new_review = Review(user=user, book=book, rating=rating, content=content)
+        new_review.save()
+        
+        return JsonResponse({
+            "status": True,
+            "message": "Success!",
+            "user_id": user.id,
+        }, status=200)
+        
