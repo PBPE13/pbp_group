@@ -3,7 +3,7 @@
 {% block content %}
 <br />
 <div class="container-review">
-    <center><strong><h1 style="font-size: 28px;">Reviews On {{ title }}</h1></strong></center>
+    <center><strong><h1 style="font-size: 28px;">Reviews</h1></strong></center>
 
     <br />
 
@@ -22,6 +22,10 @@
                             <input type="text" class="form-control" id="Username" name="Username"></input>
                         </div>
                         <div class="mb-3">
+                            <label for="Username" class="col-form-label">Book Title</label>
+                            <input type="text" class="form-control" id="book" name="book"></input>
+                        </div>
+                        <div class="mb-3">
                             <label for="rating" class="col-form-label">Rating</label>
                             <select class="form-control" id="rating" name="rating">
                                 <option value="1">1</option>
@@ -37,7 +41,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="description" class="col-form-label">Content</label>
-                            <textarea class="form-control" id="description" name="description"></textarea>
+                            <textarea class="form-control" id="description" name="content"></textarea>
                         </div>
                     </form>
                 </div>
@@ -88,36 +92,60 @@
 
     {% if user.is_authenticated %}
         <div class="text-center mb-3">
-            <button class="btn btn-primary" id="addReviewButton">Add Review</button>
+            <button class="btn btn-primary" id="addReviewButton" data-bs-toggle="modal" data-bs-target="#reviewModal">Add Review</button>
         </div>
     {% endif %}
 
-    {% for review in reviews %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ review.title }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Reviewed by: {{ review.user.username }}</h6>
-                <p class="card-text"><strong>Rating:</strong> {{ review.rating }}/5</p>
-                <p class="card-text"><strong>Date:</strong> {{ review.review_date|date:"d M Y" }}</p>
-                <p class="card-text">{{ review.content }}</p>
-
-                {% if user.is_authenticated and user == review.user %}
-                    <a href="{% url 'edit_review' review.id %}" class="btn btn-primary">Edit</a>
-                    <a href="{% url 'delete_review' review.id %}" class="btn btn-danger">Delete</a>
-                {% endif %}
-            </div>
-        </div>
-    {% empty %}
-        <p style="text-align: center;">No reviews available.</p>
-    {% endfor %}
     <br />
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 row-cols-xs-1 g-4">
     </div>
     
     <script>
-        document.getElementById("addReviewButton").addEventListener("click", function() {
-            var modal = new bootstrap.Modal(document.getElementById('reviewModal'));
-            modal.show();
+        async function getReviews() {
+            return fetch("{% url 'get_review_json' %}").then((res) => res.json());
+        }
+
+        async function refreshReviews() {
+            const reviewContainer = document.querySelector(".row");
+            reviewContainer.innerHTML = "";
+
+            const reviews = await getReviews();
+
+            reviews.forEach((review) => {
+                const reviewCard = `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">${review.fields.book}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Reviewed by: ${review.fields.user}</h6>
+                            <p class="card-text"><strong>Rating:</strong> ${review.fields.rating}/5</p>
+                            <p class="card-text"><strong>Date:</strong> ${new Date(review.fields.review_date).toLocaleDateString()}</p>
+                            <p class="card-text">${review.fields.content}</p>
+                            <!-- Add Edit/Delete buttons if needed -->
+                        </div>
+                    </div>`;
+                
+                reviewContainer.innerHTML += reviewCard;
+            });
+        }
+
+        refreshReviews();
+
+        function addReview() {
+            fetch("{% url 'add_review' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then()
+            document.getElementById("form").reset()
+        }
+        document.getElementById("button_add").onclick = addReview;
+        document.getElementById("addReviewButton").addEventListener("click", function(event) {
+            event.preventDefault();
+            var reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+            reviewModal.show();
         });
+        
         function openEditModal(reviewId, rating, content) {
             document.getElementById('reviewId').value = reviewId;
             document.getElementById('editRating').value = rating;

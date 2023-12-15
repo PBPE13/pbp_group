@@ -96,3 +96,7 @@ def update_profile(request):
 def show_json(request):
     data = Book.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def profile_json(request):
+    profile = Profile.objects.all()
+    return HttpResponse(serializers.serialize("json", profile), content_type="application/json")
