@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import show_borrow, get_borrow, borrow_book, return_book
+from .views import show_borrow, get_borrow, borrow_book, return_book, borrow_flutter
 
 app_name = 'borrow_book'  
 
@@ -8,4 +8,5 @@ urlpatterns = [
     path('get-borrow/', get_borrow, name='get_borrow'),
     path('borrow-book/', borrow_book, name = 'borrow_book'),
     path('return-book/', return_book, name='return_book'),
+    path('borrow-flutter/',borrow_flutter,name="borrow_flutter" ),
 ]

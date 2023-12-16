@@ -216,27 +216,31 @@
     async function refreshBorrow(filter = ""){
         document.querySelector(".row").innerHTML = "";
         const borrows = await getBorrow();
-        borrows.forEach((borrow, index) => {
-            if (borrow.fields.book.title.toLowerCase().includes(filter.toLowerCase())) {
-                const bookCard = `
-                    <div class="col">
-                        <div class="card mb-4">
-                            <img src="https://images.saymedia-content.com/.image/t_share/MTc0MjYyNTc5Mjg2MjU1MTAw/10-books-over-1000-pages-to-read.jpg" class="card-img-top" alt="${borrow.fields.book.title}">
-                            <div class="card-body">
-                                <h4 class="card-title">${borrow.fields.book.title}</h3>
-                                <p class="card-text">${borrow.fields.book.authors}</p>
+        if(borrows.length == 0){
+            document.querySelector(".row").innerHTML = '<p style="text-align: center;"> Anda belum meminjam buku </p>'
+        }else{
+            borrows.forEach((borrow, index) => {
+                if (borrow.fields.book.title.toLowerCase().includes(filter.toLowerCase())) {
+                    const bookCard = `
+                        <div class="col">
+                            <div class="card mb-4">
+                                <img src="https://images.saymedia-content.com/.image/t_share/MTc0MjYyNTc5Mjg2MjU1MTAw/10-books-over-1000-pages-to-read.jpg" class="card-img-top" alt="${borrow.fields.book.title}">
+                                <div class="card-body">
+                                    <h4 class="card-title">${borrow.fields.book.title}</h4>
+                                    <p class="card-text">${borrow.fields.book.authors}</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Tanggal Peminjaman: ${borrow.fields.borrow_date}</li>
+                                    <li class="list-group-item">Tanggal Pengembalian: ${borrow.fields.return_date}</li>
+                                </ul>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="returnBook(${borrow.pk})">Return</button>
                             </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Tanggal Peminjaman: ${item.fields.borrow_date}</li>
-                                <li class="list-group-item">Tanggal Pengembalian: ${item.fields.return_date}</li>
-                            </ul>
-                            <button type="button" class="btn btn-sm btn-primary" onclick="returnBook(${item.pk})">Return</button>
-                        </div>
-                    </div>`;
-                const row = document.querySelector(".row");
-                row.innerHTML += bookCard;
-            }
-        });
+                        </div>`;
+                    const row = document.querySelector(".row");
+                    row.innerHTML += bookCard;
+                }
+            });
+        }
     }
 
     async function returnBook(id){
