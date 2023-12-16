@@ -25,6 +25,10 @@ def show_diary(request):
 
     return render(request, "diary.html", context)
 
+def show_json(request):
+    data = Diary.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
 def get_diary_json(request):
     diaries = Diary.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', diaries))
