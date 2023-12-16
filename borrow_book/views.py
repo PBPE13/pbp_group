@@ -1,7 +1,9 @@
+import json
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.urls import reverse
+from borrow_book.forms import BorrowForm
 from borrow_book.models import Borrow
 from book.models import Book
 from django.views.decorators.csrf import csrf_exempt
@@ -26,16 +28,16 @@ def get_borrow(request):
 @csrf_exempt
 def borrow_book(request):
     if request.method == 'POST':
-        formData = request.POST
-        bookId = formData.get('id')
-        borrower = request.user
-        return_date = formData.get("return_date")
-        book = get_object_or_404(Book, id=bookId)
-        
-        borrow = Borrow.objects.create(book=book, borrower=borrower, borrow_date=datetime.date.today , return_date=return_date)
-        borrow.save()
-        book.status = False
-        book.save()
+        formData = BorrowForm(request.POST)
+        if formData.is_valid:
+            book = Book.objects.get(pk=id)
+            borrower = request.user
+            return_date = formData.get("return_date")
+            
+            borrow = Borrow.objects.create(book=book, borrower=borrower, borrow_date=datetime.date.today , return_date=return_date)
+            borrow.save()
+            book.status = False
+            book.save()
         
         return HttpResponse(b"CREATED", status= 201)
     
@@ -50,3 +52,19 @@ def return_book(request, id):
         return HttpResponseRedirect(reverse('book_list:show_borrow'))
     
     return HttpResponseNotFound()
+
+@csrf_exempt
+def borrow_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        borrow = Borrow.objects.create(
+            book = data["book"],
+            borrower = request.user,
+            borrow_date = datetime.date.today,
+            return_date= data["return_date"]
+        )
+        borrow.save()
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
