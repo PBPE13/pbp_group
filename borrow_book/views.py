@@ -53,6 +53,10 @@ def return_book(request, id):
     
     return HttpResponseNotFound()
 
+def get_book_by_id(request, id):
+    book = Book.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize('json', book))
+
 def get_borrow_flutter(request):
     borrow = Borrow.objects.select_related('book').all()
     return HttpResponse(serializers.serialize('json', borrow))
