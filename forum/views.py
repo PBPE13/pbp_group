@@ -187,7 +187,23 @@ def flutter_comment(request, id):
     data = json.dumps(ret, default=str)
     return HttpResponse(data, content_type='application/json')
     
-
+@login_required(login_url='/authentication/login')
+@csrf_exempt
+def flutter_add_comment(request, id):
+    if request.method == 'POST':
+        try:
+            forumPost = ForumPost.objects.get(pk=id)
+            description = request.POST['description']
+            Comment.objects.create(
+                parentForum=forumPost,
+                description=description,
+                date=datetime.date.today(),
+                user=request.user,
+            )
+            return JsonResponse({'status': 'success'})
+        except:
+            return JsonResponse({'status':'failed'})
+        
 @login_required(login_url='/authentication/login')
 @csrf_exempt
 def flutter_add_forum(request):
@@ -205,19 +221,4 @@ def flutter_add_forum(request):
         print("success")
         return JsonResponse({'status': 'success'})
 
-@login_required(login_url='/authentication/login')
-@csrf_exempt
-def flutter_add_comment(request, id):
-    if request.method == 'POST':
-        try:
-            forumPost = ForumPost.objects.get(pk=id)
-            description = request.POST['description']
-            Comment.objects.create(
-                parentForum=forumPost,
-                description=description,
-                date=datetime.date.today(),
-                user=request.user,
-            )
-            return JsonResponse({'status': 'success'})
-        except:
-            return JsonResponse({'status':'failed'})
+
