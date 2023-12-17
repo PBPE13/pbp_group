@@ -1,7 +1,9 @@
+import datetime
+import json
 from django.shortcuts import render
 from django.urls import reverse
 from .models import Diary
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.http import HttpResponseNotFound
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
@@ -42,6 +44,8 @@ def add_diary_ajax(request):
 
     return HttpResponseNotFound()
 
+@login_required(login_url='main_login')
+@csrf_exempt
 def edit_diary(request, id):
     diary = Diary.objects.get(pk=id)
 
@@ -54,7 +58,27 @@ def edit_diary(request, id):
     context = {'form': form}
     return render(request, "edit_diary.html", context)
 
+@csrf_exempt
 def delete_diary(request, id):
     diary = Diary.objects.get(pk =id)
     diary.delete()
     return HttpResponseRedirect(reverse('diary:show_diary'))
+
+@csrf_exempt
+def create_diary_flutter(request):
+    if request.method == 'POST': 
+        
+        data = json.loads(request.body)
+
+        new_diary = Diary.objects.create(
+            user = request.user,
+            title = data["title"],
+            finishDate = datetime.strptime(data.get("finishDate", ""), "%Y-%m-%d"),
+            notes = data["notes"]
+        )
+
+        new_diary.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
