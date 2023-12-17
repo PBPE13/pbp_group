@@ -1,6 +1,6 @@
 from django.urls import path
 from book_review.views import review_list, add_review, edit_review, delete_review, get_review_json
-from book_review.views import add_review_flutter
+from book_review.views import add_review_flutter, delete_review_flutter
 
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete_review/<int:review_id>/', delete_review, name='delete_review'),
     path('get-review-json/', get_review_json, name='get_review_json'),
     path('add-review-flutter/', add_review_flutter, name='add_review_flutter'),
+    path('delete-review-flutter/<int:id>/', delete_review_flutter, name='delete_review_flutter'),
 ]
