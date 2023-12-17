@@ -67,7 +67,6 @@ def flutter_register(request):
             return JsonResponse({"status": "pass failed"}, status=401)
         
         new_user = User.objects.create_user(username=username, password=password1)
-        print(username + " pass " + password1+"  ..... " + password2)
         Profile.objects.create(
             user = new_user,
             role = role,
