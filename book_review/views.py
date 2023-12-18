@@ -57,21 +57,30 @@ def get_review_json(request):
     review = Review.objects.all()
     return HttpResponse(serializers.serialize('json', review))
 
+@csrf_exempt
 def add_review_flutter(request):
     if request.method == 'POST':
         input = json.loads(request.body)
         
-        book = input['book']
-        rating = input['rating']
-        content = input['content']
-        user = request.user
-        
-        new_review = Review(user=user, book=book, rating=rating, content=content)
+        new_review = Review.objects.create(
+            user = request.user,
+            book = input["book"],
+            rating = input["rating"],
+            content = input["content"],
+        )
         new_review.save()
         
-        return JsonResponse({
-            "status": True,
-            "message": "Success!",
-            "user_id": user.id,
-        }, status=200)
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+@csrf_exempt
+def delete_review_flutter(request, id):
+    if request.method == "POST":
+        review_item = Review.objects.get(pk=id)
+        review_item.delete()
+
+        return JsonResponse({"status": "success", "message": "Success!"}, status=200)
+
+    return JsonResponse({"status": "failed", "message": "Failed!"}, status=400)
         

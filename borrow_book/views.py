@@ -53,18 +53,39 @@ def return_book(request, id):
     
     return HttpResponseNotFound()
 
+def get_book_by_id(request, id):
+    book = Book.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize('json', book))
+
+def get_borrow_flutter(request):
+    borrow = Borrow.objects.select_related('book').all()
+    return HttpResponse(serializers.serialize('json', borrow))
+
 @csrf_exempt
 def borrow_flutter(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-
+        book =  Book.objects.get(pk=id)
         borrow = Borrow.objects.create(
-            book = data["book"],
+            book =book,
             borrower = request.user,
             borrow_date = datetime.date.today,
             return_date= data["return_date"]
         )
+        book.status = False
+
+        book.save()
         borrow.save()
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+
+@csrf_exempt
+def return_book_flutter(request, id):
+    if request.method == "POST":
+        borrowed = Borrow.objects.get(pk=id)
+        book = borrowed.book
+        book.status = True
+        borrowed.delete()
+        book.save()
+    return JsonResponse({"status": "success"}, status=200)
