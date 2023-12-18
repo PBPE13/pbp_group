@@ -10,7 +10,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .forms import DiaryEditForm
 
-# Create your views here.
 @login_required(login_url='main:login')
 @csrf_exempt
 def show_diary(request):
