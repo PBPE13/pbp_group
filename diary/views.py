@@ -12,6 +12,7 @@ from .forms import DiaryEditForm
 
 # Create your views here.
 @login_required(login_url='main:login')
+@csrf_exempt
 def show_diary(request):
 
     diary = Diary.objects.filter(user=request.user)
@@ -25,6 +26,7 @@ def show_diary(request):
 
     return render(request, "diary.html", context)
 
+@csrf_exempt
 def get_diary_json(request):
     diaries = Diary.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', diaries))
