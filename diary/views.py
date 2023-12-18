@@ -31,6 +31,11 @@ def get_diary_json(request):
     return HttpResponse(serializers.serialize('json', diaries))
 
 @csrf_exempt
+def get_all_json(request):
+    diaries = Diary.objects.all()
+    return HttpResponse(serializers.serialize('json', diaries))
+
+@csrf_exempt
 def add_diary_ajax(request):
     if request.method == 'POST':
         finishDate = request.POST.get("finishDate")
