@@ -62,7 +62,7 @@ def get_borrow_flutter(request):
     return HttpResponse(serializers.serialize('json', borrow))
 
 @csrf_exempt
-def borrow_flutter(request):
+def borrow_flutter(request, id):
     if request.method == 'POST':
         data = json.loads(request.body)
         book =  Book.objects.get(pk=id)
