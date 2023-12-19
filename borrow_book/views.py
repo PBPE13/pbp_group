@@ -58,11 +58,11 @@ def get_book_by_id(request, id):
     return HttpResponse(serializers.serialize('json', book))
 
 def get_borrow_flutter(request):
-    borrow = Borrow.objects.select_related('book').all()
+    borrow = Borrow.objects.select_related('book').filter(borrower=request.user)
     return HttpResponse(serializers.serialize('json', borrow))
 
 @csrf_exempt
-def borrow_flutter(request):
+def borrow_flutter(request, id):
     if request.method == 'POST':
         data = json.loads(request.body)
         book =  Book.objects.get(pk=id)

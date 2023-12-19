@@ -9,7 +9,7 @@ urlpatterns = [
     path('borrow-book/', borrow_book, name = 'borrow_book'),
     path('return-book/', return_book, name='return_book'),
     path('get-book-by-id/<int:id>/', get_book_by_id, name="get_book_by_id"),
-    path('borrow-flutter/',borrow_flutter,name="borrow_flutter" ),
+    path('borrow-flutter/<int:id>/',borrow_flutter,name="borrow_flutter" ),
     path('get-borrow-flutter/', get_borrow_flutter, name= "get_borrow_flutter"),
-    path('return-book-flutter/', return_book_flutter, name="return_book_flutter")
+    path('return-book-flutter/<int:id>/', return_book_flutter, name="return_book_flutter")
 ]
