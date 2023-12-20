@@ -73,14 +73,15 @@ def delete_diary(request, id):
 @csrf_exempt
 def create_diary_flutter(request):
     if request.method == 'POST': 
-        
-        data = json.loads(request.body)
+        title = request["title"],
+        finishDate = datetime.strptime(request.get("finishDate", ""), "%Y-%m-%d"),
+        notes = request["notes"]
 
         new_diary = Diary.objects.create(
+            title = title,
+            finishDate = finishDate,
+            notes = notes,
             user = request.user,
-            title = data["title"],
-            finishDate = datetime.strptime(data.get("finishDate", ""), "%Y-%m-%d"),
-            notes = data["notes"]
         )
 
         new_diary.save()
